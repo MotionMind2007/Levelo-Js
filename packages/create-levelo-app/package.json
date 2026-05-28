@@ -1,0 +1,31 @@
+{
+  "name": "create-levelo-app",
+  "version": "1.0.1",
+  "description": "The official standard boilerplate bootstrapper for Levelo JS applications",
+  "main": "cli.js",
+  "type": "module",
+  "bin": {
+    "create-levelo-app": "./cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "levelo",
+    "levelo-js",
+    "create-app",
+    "cli",
+    "scaffold",
+    "frontend",
+    "framework"
+  ],
+  "author": "MotionMind2007",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MotionMind2007/Levelo-Js/issues"
+  },
+  "homepage": "https://github.com/MotionMind2007/Levelo-Js#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

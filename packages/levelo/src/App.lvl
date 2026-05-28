@@ -1,0 +1,266 @@
+#head {
+  <title>Welcome to Levelo JS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/logo-icon.png">
+}
+
+#logic {
+  // Global configuration state properties setup onto the window interface
+  window.leveloName = "Levelo Js"; 
+  window.leveloCount = 0;
+  window.frameworkStatus = "Ready to Build";
+
+  // State mutation handler function containing reactivity updates
+  window.incrementCount = function() {
+    window.leveloCount++;
+    
+    // Evaluation tree to update conditional logs dynamically based on the count state
+    if (window.leveloCount >= 5) {
+      window.frameworkStatus = "Production Optimized State Active";
+    } else {
+      window.frameworkStatus = "Ready to Build";
+    }
+
+    // Refresh synchronization execution call
+    if (window.updateUI) {
+      window.updateUI();
+    }
+  }
+}
+
+#design {
+  :root {
+    --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary-color: #000000;
+    --primary-hover: #1e293b;
+    --accent-badge: #f1f5f9;
+    --accent-text: #0f172a;
+    --border-color: rgba(226, 232, 240, 0.8);
+    --shadow-premium: 0 25px 50px -12px rgba(15, 23, 42, 0.04);
+  }
+
+  body {
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  .app-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
+    background: var(--card-bg);
+    padding: 30px 24px;
+    border-radius: 24px;
+    box-shadow: var(--shadow-premium);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .logo-wrapper {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1.5);
+  }
+
+  .title-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px 0;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text-main);
+  }
+
+  .version-tag {
+    background: #000000;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    align-self: center;
+  }
+
+  .instruction-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    padding: 0 8px;
+  }
+
+  .code-badge {
+    background: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid #e2e8f0;
+  }
+
+  .counter-btn {
+    background: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    margin-bottom: 24px;
+    width: 100%;
+    letter-spacing: -0.01em;
+  }
+
+  .counter-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.25);
+  }
+
+  .counter-btn:active {
+    transform: translateY(0);
+  }
+
+  .status-badge {
+    display: inline-block;
+    background: var(--accent-badge);
+    color: var(--accent-text);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 35px;
+    border: 1px solid #e2e8f0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 24px;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: #000000;
+  }
+
+  .separator {
+    color: #cbd5e1;
+    user-select: none;
+  }
+
+  /* Responsive Multi-Platform Media Query Specifications */
+  @media (max-width: 768px) {
+    .app-container {
+      padding: 40px 20px;
+      width: 90%;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .footer-links {
+      gap: 16px;
+    }
+  }
+}
+
+#layout {
+  <div class="app-container">
+    <div class="logo-container">
+      <div class="logo-wrapper">
+        <img src="/logo-with-text.png">
+      </div>
+    </div>
+
+    <div class="title-area">
+      <h1>Get started</h1>
+      <span class="version-tag">v1.0.0</span>
+    </div>
+    
+    <p class="instruction-text">
+      Edit <span class="code-badge">src/App.lvl</span> and save to trigger the zero-runtime compilation matrix.
+    </p>
+
+    <button lvl-click="incrementCount()" class="counter-btn">
+      Level Up → [count]
+    </button>
+
+    <div>
+      <span class="status-badge">[frameworkStatus]</span>
+      <h4>[name]</h2>
+    </div>
+
+    <footer class="footer-links">
+      <a href="https://vite.dev" target="_blank" class="footer-link">Explore Vite</a>
+      <span class="separator">•</span>
+      <a href="https://motionmind.me" target="_blank" class="footer-link">Creator Portfolio</a>
+      <span class="separator">•</span>
+      <a href="#" target="_blank" class="footer-link">NPM Repository</a>
+      <span class="separator">•</span>
+      <a href="https://github.com/MotionMind2007/Levelo-Js" target="_blank" class="footer-link">GitHub</a>
+    </footer>
+  </div>
+}

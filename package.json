@@ -1,0 +1,19 @@
+{
+  "name": "levelo-js-monorepo",
+  "description": "Supper fast beggener friendly lightweigt javascript framework, powered by Motion Mind",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MotionMind2007/Levelo-Js.git"
+  },
+  "author": "MotionMind2007",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MotionMind2007/Levelo-Js/issues"
+  },
+  "homepage": "https://github.com/MotionMind2007/Levelo-Js#readme",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

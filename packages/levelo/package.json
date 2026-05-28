@@ -1,0 +1,18 @@
+{
+  "name": "levelo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@vitejs/plugin-legacy": "^8.0.2",
+    "vite": "^8.0.14"
+  }
+}
