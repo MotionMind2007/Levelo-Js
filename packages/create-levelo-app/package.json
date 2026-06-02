@@ -1,12 +1,15 @@
 {
   "name": "create-levelo-app",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "The official standard boilerplate bootstrapper for Levelo JS applications",
-  "main": "cli.js",
   "type": "module",
   "bin": {
-    "create-levelo-app": "./cli.js"
+    "create-levelo-app": "cli.js"
   },
+  "files": [
+    "cli.js",
+    "templates"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

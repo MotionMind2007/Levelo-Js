@@ -23,7 +23,7 @@ const projectDir = targetArg === '.' ? process.cwd() : path.resolve(process.cwd(
 const projectName = targetArg === '.' ? path.basename(projectDir) : targetArg;
 
 // Map path directly to inner localized template ecosystem
-const templateDir = path.join(__dirname, 'templates');
+const templateDir = path.join(__dirname, 'templates/jsx');
 
 // Recursive file mirroring system engine to duplicate workspace structural state
 function copyFolderSync(from, to) {
@@ -46,7 +46,7 @@ function copyFolderSync(from, to) {
   });
 }
 
-console.log(`\n🚀 Scaffolding a fresh Levelo JS ecosystem inside: ${projectDir}...`);
+console.log(`\n Scaffolding a fresh Levelo JS ecosystem inside: ${projectDir}...`);
 
 try {
   // Execute direct structural copy-paste operation
@@ -58,15 +58,12 @@ try {
     const pkg = JSON.parse(fs.readFileSync(userPackageJsonPath, 'utf-8'));
     
     pkg.name = projectName;
-    pkg.version = "1.0.0";
-    pkg.type = "module";
-    pkg.description = "A premium reactive single-file application powered by Levelo JS";
     
     fs.writeFileSync(userPackageJsonPath, JSON.stringify(pkg, null, 2), 'utf-8');
   }
 
   // Trigger non-blocking child processor execution sequence for dependencies matching
-  console.log('\n📦 Dependencies are being fetched via node package manager...');
+  console.log('\n Dependencies are being fetched via node package manager...');
   execSync('npm install', { cwd: projectDir, stdio: 'inherit' });
 
   console.log('\n======================================================');
