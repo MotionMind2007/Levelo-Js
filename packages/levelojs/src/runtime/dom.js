@@ -38,8 +38,22 @@ export function h(tag, props, ...children) {
       element.addEventListener(eventName, value);
     }
     // B. Handle Static or Reactive Style Objects
-    else if (key === 'style' && typeof value === 'object') {
-      Object.assign(element.style, value);
+    else if (key === 'style' && value !== null) {
+      const descriptor = Object.getOwnPropertyDescriptor(safeProps, key);
+      if (descriptor && descriptor.get) {
+        // Reactive style
+        effect(() => {
+          const styleVal = safeProps[key];
+          if (typeof styleVal === 'object') {
+            Object.assign(element.style, styleVal);
+          } else if (typeof styleVal === 'string') {
+            element.style.cssText = styleVal;
+          }
+        });
+      } else if (typeof value === 'object') {
+        // Static style
+        Object.assign(element.style, value);
+      }
     }
     // C. Handle Dynamic Getters / Properties
     else {
@@ -47,8 +61,14 @@ export function h(tag, props, ...children) {
       const descriptor = Object.getOwnPropertyDescriptor(safeProps, key);
       if (descriptor && descriptor.get) {
         // We defer this execution to the Reactivity Layer (Layer 3)
-        // For now, evaluate immediately to guarantee Version 2.0.0 stability
-        element.setAttribute(key, safeProps[key]);
+        console.log('[reactive attr]', key);
+        effect(() => {
+          let val = safeProps[key];
+          if (typeof val === 'function') val = val();
+          if (val !== false && val !== null && val !== undefined) {
+            element.setAttribute(key, val);
+          }
+        });
       } else {
         if (value !== false && value !== null && value !== undefined) {
           element.setAttribute(key, value);

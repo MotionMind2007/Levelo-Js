@@ -10,9 +10,12 @@ let activeEffect = null;
  * @param {Function} callback 
  */
 export function effect(callback) {
-  activeEffect = callback;
-  callback();
-  activeEffect = null;
+  const execute = () => {
+    activeEffect = execute;
+    callback();
+    activeEffect = null;
+  };
+  execute();
 }
 
 /**
@@ -34,6 +37,7 @@ export function state(initialValue) {
   const setter = (newValue) => {
     if (value !== newValue) {
       value = newValue;
+      console.log('[state] notifying', subscribers.size, 'subscribers');
       subscribers.forEach((sub) => sub());
     }
   };

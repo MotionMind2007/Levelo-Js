@@ -90,7 +90,7 @@ function leveloJsBabelTransformer({ types: t }) {
         openingElement.attributes.forEach(attr => {
           if (t.isJSXAttribute(attr)) {
             const propKey = t.identifier(attr.name.name);
-            
+
             if (t.isJSXExpressionContainer(attr.value)) {
               const expression = attr.value.expression;
               const getterProperty = t.objectMethod(
