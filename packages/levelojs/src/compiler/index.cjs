@@ -122,8 +122,11 @@ function leveloJsBabelTransformer({ types: t }) {
           else if (t.isJSXExpressionContainer(child)) {
             const expression = child.expression;
             if (!t.isJSXEmptyExpression(expression)) {
-              const arrowFunctionWrapper = t.arrowFunctionExpression([], expression);
-              children.push(arrowFunctionWrapper);
+              if (t.isArrowFunctionExpression(expression)) {
+                children.push(expression);
+              } else {
+                children.push(t.arrowFunctionExpression([], expression));
+              }
             }
           } 
           else if (t.isJSXElement(child)) {

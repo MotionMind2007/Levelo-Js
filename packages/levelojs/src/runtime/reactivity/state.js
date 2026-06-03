@@ -37,7 +37,6 @@ export function state(initialValue) {
   const setter = (newValue) => {
     if (value !== newValue) {
       value = newValue;
-      console.log('[state] notifying', subscribers.size, 'subscribers');
       subscribers.forEach((sub) => sub());
     }
   };
