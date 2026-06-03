@@ -1,6 +1,6 @@
 {
   "name": "levelojs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A core building library for the Levelo JS framework, providing reactive primitives and a Direct Real DOM-based rendering interface for optimized UI construction.",
   "main": "src/index.js",
   "exports": {
@@ -29,9 +29,6 @@
   "type": "module",
   "dependencies": {
     "@babel/core": "^7.29.7",
-    "@babel/generator": "^7.29.7",
-    "@babel/parser": "^7.29.7",
-    "@babel/plugin-syntax-jsx": "^7.29.7",
-    "@babel/traverse": "^7.29.7"
+    "@babel/plugin-syntax-jsx": "^7.29.7"
   }
 }

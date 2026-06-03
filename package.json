@@ -1,6 +1,9 @@
 {
   "name": "levelo-js-monorepo",
-  "description": "Supper fast beggener friendly lightweigt javascript framework, powered by Motion Mind",
+  "levelo": {
+    "level": 1
+  },
+  "description": "Super fast beginner friendly lightweight javascript framework, powered by Motion Mind",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MotionMind2007/Levelo-Js.git"
