@@ -1,6 +1,6 @@
 {
   "name": "levelojs",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A core building library for the Levelo JS framework, providing reactive primitives and a Direct Real DOM-based rendering interface for optimized UI construction.",
   "main": "src/index.js",
   "exports": {
@@ -22,7 +22,9 @@
     "ultra-fast",
     "no-vdom",
     "ui-builder",
-    "core"
+    "core",
+    "Levelo Js",
+    "Motion Mind"
   ],
   "author": "MotionMind2007",
   "license": "MIT",

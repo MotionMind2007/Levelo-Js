@@ -1,5 +1,6 @@
 // router.js - Optimized Enterprise Routing Engine for Levelo JS (Version 2.0.0 Specs)
 import { h } from './dom.js';
+import { applyHeadUpdates } from './head.js';
 
 // Global registry to keep track of the dynamic route-to-component mappings
 const routes = new Map();
@@ -111,6 +112,8 @@ export function Pages(props) {
       currentRenderedNode = instance;
       container.appendChild(currentRenderedNode);
     }
+    //update head
+    applyHeadUpdates();
   };
 
   // Subscribe this container instance to global location updates

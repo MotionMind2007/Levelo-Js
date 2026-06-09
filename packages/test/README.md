@@ -87,4 +87,5 @@ Levelo JS is a lightweight, ultra-fast reactive UI framework built by [Motion Mi
 [MIT](LICENSE) © Motion Mind
 
 ---
+
 Built with by [Motion Mind](https://lab.motionmind.me)
