@@ -1,27 +1,9 @@
-<!-- Levelo JS Official Geometric Logo SVG with Gradient Fill -->
-<svg class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="1298.0 1320.1 475.2 395.8" width="475" height="396">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1298.0 1320.1 475.2 395.8">
   <defs>
     <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#5b4fff"/>
       <stop offset="100%" stop-color="#a78bfa"/>
     </linearGradient>
-    
-    <style>
-      .nav-logo-svg {
-        width: 100%;
-        max-width: 48px; /* Adjust this to fit your navigation bar */
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
-        /* Drop-shadow that matches the filled gradient color */
-        filter: drop-shadow(0px 4px 12px rgba(91, 79, 255, 0.35));
-        transition: transform 0.3s ease, filter 0.3s ease;
-      }
-      .nav-logo-svg:hover {
-        transform: translateY(-1px);
-        filter: drop-shadow(0px 6px 16px rgba(91, 79, 255, 0.5));
-      }
-    </style>
   </defs>
 
   <g fill="url(#logoGrad)">
