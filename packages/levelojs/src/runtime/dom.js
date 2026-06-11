@@ -18,6 +18,18 @@ export function setOwner(owner) {
  */
 export function h(tag, props, ...children) {
   const safeProps = props || {};
+  
+  // Seamlessly normalize 'className' to 'class' for React ecosystem compatibility
+  if ('className' in safeProps) {
+    const descriptor = Object.getOwnPropertyDescriptor(safeProps, 'className');
+    if (descriptor) {
+      Object.defineProperty(safeProps, 'class', descriptor);
+    } else {
+      safeProps.class = safeProps.className;
+    }
+    delete safeProps.className;
+  }
+
 
   // 1. Component Resolution Layer (<Pages />, <Page />, <HomePage />)
   if (typeof tag === 'function') {

@@ -35,8 +35,11 @@ export function state(initialValue) {
   };
 
   const setter = (newValue) => {
-    if (value !== newValue) {
-      value = newValue;
+    // Core functional update logic to support state callbacks safely
+    const resolvedValue = typeof newValue === 'function' ? newValue(value) : newValue;
+
+    if (value !== resolvedValue) {
+      value = resolvedValue;
       subscribers.forEach((sub) => sub());
     }
   };

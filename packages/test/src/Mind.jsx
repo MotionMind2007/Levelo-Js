@@ -1,122 +1,85 @@
 // src/Mind.jsx
-import { Pages, Page, head, style } from 'levelojs';
-import logo from './assets/logo-icon.png';
+import { Pages, Page, head, style, state, effect } from 'levelojs';
 
-// =========================================================================
-// 1. HOME PAGE LAYER (Global Styles & Dynamic Component)
-// =========================================================================
-
-// Top-level global stylesheet compilation for Home route (Safe to keep global)
+// 1. Compile localized dashboard presentation styles
 style({
-  '.home-shell': {
+  '.lab-container': {
     backgroundColor: '#0f172a',
     minHeight: '100vh',
     color: '#e2e8f0',
-    padding: '60px 24px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     fontFamily: 'system-ui, sans-serif'
   },
-  '.route-trigger': {
-    display: 'inline-block',
-    marginTop: '24px',
-    color: '#38bdf8',
-    textDecoration: 'none',
-    fontWeight: '700',
-    fontSize: '1.25rem',
-    borderBottom: '2px solid transparent'
-  },
-  '.route-trigger:hover': {
-    borderBottomColor: '#38bdf8'
-  }
-});
-
-/**
- * Embedded Home View Component Node
- * @returns {HTMLElement} - Renderable DOM template
- */
-function Home() {
-  // Executed dynamically every single time the Home route mounts
-  head({
-    title: 'Home - Levelo JS Lab',
-    description: 'Welcome to the centralized Levelo JS integrated testing dashboard.',
-    themeColor: '#0f172a',
-    link: [
-      { rel: 'icon', type: 'image/png', href: logo }
-    ]
-  });
-
-  return (
-    <div class="home-shell">
-      <h1>🏠 Levelo Home Hub</h1>
-      <p>This localized scene is executing smoothly within a single-file architecture bundle.</p>
-      <a href="/document" class="route-trigger">Explore Live Documentation ➔</a>
-    </div>
-  );
-}
-
-
-// =========================================================================
-// 2. DOCUMENT PAGE LAYER (Global Styles & Dynamic Component)
-// =========================================================================
-
-// Top-level global stylesheet compilation for Document route (Safe to keep global)
-style({
-  '.doc-shell': {
+  '.counter-card': {
     backgroundColor: '#1e293b',
-    minHeight: '100vh',
-    color: '#f8fafc',
-    padding: '60px 24px',
-    fontFamily: 'system-ui, sans-serif'
+    padding: '32px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center'
   },
-  '.return-trigger': {
-    display: 'inline-block',
-    marginTop: '24px',
-    color: '#f43f5e',
-    textDecoration: 'none',
-    fontWeight: '700',
-    fontSize: '1.25rem',
-    borderBottom: '2px solid transparent'
+  '.action-btn': {
+    backgroundColor: '#10b981',
+    color: '#ffffff',
+    border: 'none',
+    padding: '12px 24px',
+    fontSize: '1rem',
+    fontWeight: '600',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    marginTop: '16px',
+    transition: 'background-color 0.2s'
   },
-  '.return-trigger:hover': {
-    borderBottomColor: '#f43f5e'
+  '.action-btn:hover': {
+    backgroundColor: '#059669'
   }
 });
 
 /**
- * Embedded Document View Component Node
- * @returns {HTMLElement} - Renderable DOM template
+ * High-Fidelity Reactive State Testing Lab Component Node
  */
-function Document() {
-  // Executed dynamically every single time the Document route mounts
+function StateTestingLab() {
   head({
-    title: 'Documentation - Levelo JS Lab',
-    description: 'Deep dive into the declarative routing matrix specifications.',
-    themeColor: '#1e293b'
+    title: 'State Callback Test - Levelo JS',
+    themeColor: '#0f172a'
   });
 
+  // Initialize reactive counter state primitive
+  const [count, setCount] = state(0);
+
+  const incrementCounter = () => {
+    // TESTING: Passing a functional callback to the state setter
+    setCount(prev => prev + 1);
+  };
+
   return (
-    <div class="doc-shell">
-      <h1>📚 Levelo Core Specs</h1>
-      <p>Analyze how hyper-reactive scopes render components instantly without heavy bundles.</p>
-      <a href="/" class="return-trigger">❮ Back to Dashboard Home</a>
+    // TESTING: React-style className token normalization
+    <div className="lab-container">
+      <div className="counter-card">
+        <h1>🧪 Functional State Callback Lab</h1>
+        <p>Testing reactive update pipes inside Levelo core factory rules.</p>
+        
+        {/* The DOM factory compiler automatically wraps this getter evaluation */}
+        <h3>Current Counter: {() => count()}</h3>
+
+        {/* TESTING: CamelCase event handler mapping */}
+        <button className="action-btn" onClick={incrementCounter}>
+          Increment (Functional)
+        </button>
+      </div>
     </div>
   );
 }
 
-
-// =========================================================================
-// 3. MAIN ROUTING ENGINE WRAPPER (Mind Component)
-// =========================================================================
-
 /**
- * Main Standalone Routing Matrix Manager Layer
- * Orchestrates view-swapping flows cleanly using the unified declarative specs.
- * @returns {HTMLElement} - Root layout container view element
+ * Global Routing Context Shell Manager
  */
 function Mind() {
   return (
     <Pages>
-      <Page path="/" component={Home} />
-      <Page path="/document" component={Document} />
+      <Page path="/" component={StateTestingLab} />
     </Pages>
   );
 }

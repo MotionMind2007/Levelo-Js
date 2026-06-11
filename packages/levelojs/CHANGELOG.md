@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0] - 2026-06-09
+
+### Added
+- Functional State Updates: `state()` setter now fully supports functional callback updates (`setCount(prev => prev + 1)`), enabling safe updates based on previous state values.
+- React Ecosystem Compatibility: Seamlessly normalizes `className` to native `class` attributes at the HyperScript level, preserving full dynamic property descriptor/getter reactivity.
+- CamelCase Event Normalization: Automatic mapping for CamelCase listeners (e.g., `onClick`, `onChange`) into lower-case native browser event triggers.
+
+### Fixed
+- SPA Viewport Scroll Reset: Fixed a critical single-page routing bug where changing pages/views kept the previous page's scroll position. The viewport now automatically resets to the top `(0, 0)` upon every successful route transition in `Pages`.
+
+---
+
 ## [1.1.0] - 2026-06-09
 
 ### Added

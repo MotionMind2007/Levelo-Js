@@ -1,6 +1,6 @@
 {
   "name": "levelojs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A core building library for the Levelo JS framework, providing reactive primitives and a Direct Real DOM-based rendering interface for optimized UI construction.",
   "main": "src/index.js",
   "exports": {

@@ -111,6 +111,8 @@ export function Pages(props) {
     if (instance instanceof HTMLElement) {
       currentRenderedNode = instance;
       container.appendChild(currentRenderedNode);
+      
+      window.scrollTo(0, 0);
     }
     //update head
     applyHeadUpdates();
