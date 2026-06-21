@@ -1,86 +1,46 @@
 // src/Mind.jsx
-import { Pages, Page, head, style, state, effect } from 'levelojs';
+import { head, style } from 'levelojs';
 
-// 1. Compile localized dashboard presentation styles
+// Inject basic scope styling to replace standard React Native Flexbox containers
 style({
-  '.lab-container': {
+  '.app-container': {
     backgroundColor: '#0f172a',
     minHeight: '100vh',
-    color: '#e2e8f0',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    fontFamily: 'system-ui, sans-serif'
-  },
-  '.counter-card': {
-    backgroundColor: '#1e293b',
-    padding: '32px',
-    borderRadius: '12px',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center'
-  },
-  '.action-btn': {
-    backgroundColor: '#10b981',
-    color: '#ffffff',
-    border: 'none',
-    padding: '12px 24px',
-    fontSize: '1rem',
-    fontWeight: '600',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    marginTop: '16px',
-    transition: 'background-color 0.2s'
-  },
-  '.action-btn:hover': {
-    backgroundColor: '#059669'
+    justifyContent: 'center'
   }
 });
 
 /**
- * High-Fidelity Reactive State Testing Lab Component Node
- */
-function StateTestingLab() {
-  head({
-    title: 'State Callback Test - Levelo JS',
-    themeColor: '#0f172a'
-  });
-
-  // Initialize reactive counter state primitive
-  const [count, setCount] = state(0);
-
-  const incrementCounter = () => {
-    // TESTING: Passing a functional callback to the state setter
-    setCount(prev => prev + 1);
-  };
-
-  return (
-    // TESTING: React-style className token normalization
-    <div className="lab-container">
-      <div className="counter-card">
-        <h1>🧪 Functional State Callback Lab</h1>
-        <p>Testing reactive update pipes inside Levelo core factory rules.</p>
-        
-        {/* The DOM factory compiler automatically wraps this getter evaluation */}
-        <h3>Current Counter: {() => count()}</h3>
-
-        {/* TESTING: CamelCase event handler mapping */}
-        <button className="action-btn" onClick={incrementCounter}>
-          Increment (Functional)
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/**
- * Global Routing Context Shell Manager
+ * Main Entry Point Component optimized for isolated SVG namespace testing.
  */
 function Mind() {
+  // Set up tab browser environment contexts natively
+  head({
+    title: 'Levelo JS - SVG Render Test'
+  });
+
   return (
-    <Pages>
-      <Page path="/" component={StateTestingLab} />
-    </Pages>
+    <div className="app-container">
+      {/* Standard JSX parsing setup. Using safe custom property names that 
+        Babel syntax tokenizers can evaluate natively without parsing failures.
+      */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="200"
+        height="200"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#10b981"
+        strokeWidth="1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+        <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      </svg>
+    </div>
   );
 }
 

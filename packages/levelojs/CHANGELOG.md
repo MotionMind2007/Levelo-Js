@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0] - 2026-06-21
+
+### Added
+- Successfully implemented deep tree namespace delegation. Nested graphical vectors(like <svg>, <path>, <math> etc.) now correctly inherit their respective explicit XML namespaces.
+
+### Fixed
+- Resolved a critical layout rendering bug where CamelCase attributes like 'strokeWidth', 'strokeLinecap', 'strokeLinejoin' were rejected by browser DOM. The dom.js hyperscript element factory now dynamically normalizes them into safe, valid kebab-case properties at the runtime layout injection layer.
+
+---
+
 ## [1.2.0] - 2026-06-09
 
 ### Added

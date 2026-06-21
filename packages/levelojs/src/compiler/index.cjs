@@ -73,6 +73,98 @@ function leveloPlugin(options = {}) {
 }
 
 /**
+ * Shared Top-Down Recursive JSX Transformer.
+ * Recursively injects namespaces into children elements.
+ */
+
+function transformJSX(path, t, parentNameSpace = null) {
+  const openingElement = path.node.openingElement;
+  const tagName = openingElement.name.name;
+
+  const isSvg = tagName === 'svg';
+  const isMath = tagName === 'math';
+
+  const namespace = 
+    parentNameSpace || 
+    (isSvg ? 'svg' : isMath ? 'math' : null);
+
+  const isComponent = tagName[0] === tagName[0].toUpperCase();
+  const factoryIdentifier = isComponent ? t.identifier(tagName) : t.stringLiteral(tagName);
+
+  const properties = [];
+  openingElement.attributes.forEach(attr => {
+    if (t.isJSXAttribute(attr)) {
+      const propKey = t.identifier(attr.name.name);
+
+      if (t.isJSXExpressionContainer(attr.value)) {
+        const expression = attr.value.expression;
+        const getterProperty = t.objectMethod(
+          'get',
+          propKey,
+          [],
+          t.blockStatement([t.returnStatement(expression)])
+        );
+        properties.push(getterProperty);
+      }
+      else if (attr.value) {
+        properties.push(t.objectProperty(propKey, attr.value));
+      }
+      else {
+        properties.push(t.objectProperty(propKey, t.booleanLiteral(true)));
+      }
+    }
+  });
+
+  // Inject __namespace property into attributes if an active namespace is detected
+  if (namespace) {
+    properties.push(t.objectProperty(
+      t.identifier("__namespace"),
+      t.stringLiteral(
+        namespace === "svg" ? "http://www.w3.org/2000/svg" : "http://www.w3.org/1998/Math/MathML"
+      )
+    ));
+  }
+
+  const propsObject = t.objectExpression(properties);
+  const children = [];
+  const childPaths = path.get('children');
+
+  path.node.children.forEach((child, index) => {
+    if (t.isJSXText(child)) {
+      const cleanText = child.value.trim();
+      if (cleanText) {
+        children.push(t.stringLiteral(cleanText));
+      }
+    }
+    else if (t.isJSXExpressionContainer(child)) {
+      const expression = child.expression;
+      if (!t.isJSXEmptyExpression(expression)) {
+        if (t.isArrowFunctionExpression(expression)) {
+          children.push(expression);
+        } else {
+          children.push(t.arrowFunctionExpression([], expression));
+        }
+      }
+    }
+    // Recursively transform nested JSX elements while passing types (t) and the active namespace context
+    else if (t.isJSXElement(child)) {
+      transformJSX(childPaths[index], t, namespace)
+      children.push(childPaths[index].node)
+    }
+  });
+
+  const callExpression = t.callExpression(t.identifier('h'), [
+    factoryIdentifier,
+    propsObject,
+    ...children
+  ]);
+
+  path.replaceWith(callExpression);
+  path.skip();
+
+}
+
+/**
  * Deep AST Transformation Node Visitor.
  */
 function leveloJsBabelTransformer({ types: t }) {
@@ -80,67 +172,8 @@ function leveloJsBabelTransformer({ types: t }) {
     name: 'levelojs-jsx-transformer',
     visitor: {
       JSXElement(path) {
-        const openingElement = path.node.openingElement;
-        const tagName = openingElement.name.name;
-
-        const isComponent = tagName[0] === tagName[0].toUpperCase();
-        const factoryIdentifier = isComponent ? t.identifier(tagName) : t.stringLiteral(tagName);
-
-        const properties = [];
-        openingElement.attributes.forEach(attr => {
-          if (t.isJSXAttribute(attr)) {
-            const propKey = t.identifier(attr.name.name);
-
-            if (t.isJSXExpressionContainer(attr.value)) {
-              const expression = attr.value.expression;
-              const getterProperty = t.objectMethod(
-                'get',
-                propKey,
-                [],
-                t.blockStatement([t.returnStatement(expression)])
-              );
-              properties.push(getterProperty);
-            } 
-            else if (attr.value) {
-              properties.push(t.objectProperty(propKey, attr.value));
-            } 
-            else {
-              properties.push(t.objectProperty(propKey, t.booleanLiteral(true)));
-            }
-          }
-        });
-        const propsObject = t.objectExpression(properties);
-
-        const children = [];
-        path.node.children.forEach(child => {
-          if (t.isJSXText(child)) {
-            const cleanText = child.value.trim();
-            if (cleanText) {
-              children.push(t.stringLiteral(cleanText));
-            }
-          } 
-          else if (t.isJSXExpressionContainer(child)) {
-            const expression = child.expression;
-            if (!t.isJSXEmptyExpression(expression)) {
-              if (t.isArrowFunctionExpression(expression)) {
-                children.push(expression);
-              } else {
-                children.push(t.arrowFunctionExpression([], expression));
-              }
-            }
-          } 
-          else if (t.isJSXElement(child)) {
-            children.push(child);
-          }
-        });
-
-        const callExpression = t.callExpression(t.identifier('h'), [
-          factoryIdentifier,
-          propsObject,
-          ...children
-        ]);
-
-        path.replaceWith(callExpression);
+        // Root elements start with a null parent namespace context, passing down babel types (t)
+        transformJSX(path, t, null);
       }
     }
   };

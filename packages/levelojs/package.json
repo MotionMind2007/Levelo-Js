@@ -1,6 +1,6 @@
 {
   "name": "levelojs",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A core building library for the Levelo JS framework, providing reactive primitives and a Direct Real DOM-based rendering interface for optimized UI construction.",
   "main": "src/index.js",
   "exports": {
@@ -29,6 +29,14 @@
   "author": "MotionMind2007",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MotionMind2007/Levelo-Js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MotionMind2007/Levelo-Js/issues"
+  },
+  "homepage": "https://levelojs.motionmind.me",
   "dependencies": {
     "@babel/core": "^7.29.7",
     "@babel/plugin-syntax-jsx": "^7.29.7"
