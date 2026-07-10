@@ -18,5 +18,11 @@
   "private": true,
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "tsup": "^8.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
 }

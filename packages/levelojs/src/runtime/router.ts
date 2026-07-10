@@ -1,12 +1,13 @@
-// router.js - Optimized Enterprise Routing Engine for Levelo JS (Version 2.0.0 Specs)
+// router.ts - Optimized Enterprise Routing Engine for Levelo JS (Version 2.0.0 Specs)
 import { h } from './dom.js';
 import { applyHeadUpdates } from './head.js';
+import { getClean404Component } from './templates/error404.js';
 
 // Global registry to keep track of the dynamic route-to-component mappings
-const routes = new Map();
+const routes = new Map<string, (props: any) => Element>();
 
 // Global listener callback queue to trigger DOM view swaps when URL shifts
-const routeListeners = new Set();
+const routeListeners = new Set<(path: string) => void>();
 
 /**
  * Programmatically triggers all registered view listeners to force a re-render
@@ -18,19 +19,19 @@ function notifyRouteListeners() {
 
 // Core Navigation Interceptor Layer (Global Anchor Tracking)
 if (typeof window !== 'undefined') {
-  // 1. Intercept browser back/forward buttons (popstate) natively
+  // Intercept browser back/forward buttons (popstate) natively
   window.addEventListener('popstate', () => {
     notifyRouteListeners();
   });
 
-  // 2. GLOBAL ANCHOR INTERCEPTION: Listen to ALL clicks on the document
-  document.addEventListener('click', (e) => {
-    const anchor = e.target.closest('a');
+  // GLOBAL ANCHOR INTERCEPTION: Listen to ALL clicks on the document
+  document.addEventListener('click', (e: MouseEvent) => {
+    const anchor = (e.target as HTMLElement).closest('a');
     
     if (!anchor) return;
     
     const href = anchor.getAttribute('href');
-    if (!href || href.startsWith('http://') || href.startsWith('https://') || href.startsWith('#') && href.length > 1 || anchor.target === '_blank') {
+    if (!href || href.startsWith('http://') || href.startsWith('https://') || (href.startsWith('#') && href.length > 1) || anchor.target === '_blank') {
       return; 
     }
 
@@ -44,13 +45,16 @@ if (typeof window !== 'undefined') {
   });
 }
 
+interface PageProps {
+  path: string;
+  component: (props: any) => Element;
+}
+
 /**
  * Configuration schema defining a standalone path pattern matching node.
  * Executed via Levelo's h() Factory.
- * @param {Object} props - Expects 'path' string and 'component' function
- * @returns {Object} - Static configuration descriptor
  */
-export function Page(props) {
+export function Page(props: PageProps): Record<string, any> {
   return {
     type: 'PAGE_CONFIG',
     path: props.path,
@@ -58,12 +62,14 @@ export function Page(props) {
   };
 }
 
+interface PagesProps {
+  children: any | any[];
+}
+
 /**
  * High-performance Viewport Container that automatically swaps structural page nodes dynamically.
- * @param {Object} props - Holds child <Page> arrays generated via JSX
- * @returns {HTMLElement} - Dynamic viewport shell routing container
  */
-export function Pages(props) {
+export function Pages(props: PagesProps): HTMLElement {
   const container = document.createElement('div');
   container.className = 'levelo-viewport-wrapper';
 
@@ -78,13 +84,12 @@ export function Pages(props) {
   });
 
   // Track the currently rendered DOM node to allow precision swapping
-  let currentRenderedNode = null;
+  let currentRenderedNode: Element | null = null;
 
   /**
    * Evaluates the current location and replaces the active view context cleanly
-   * @param {string} currentPath - The current window location pathname
    */
-  const renderActiveRoute = (currentPath) => {
+  const renderActiveRoute = (currentPath: string): void => {
     let normalizedPath = currentPath.length > 1 && currentPath.endsWith('/') ? currentPath.replace(/\/+$/, '') : currentPath;
     
     if (normalizedPath.endsWith('index.html')) {
@@ -92,23 +97,21 @@ export function Pages(props) {
     }
     
     if (normalizedPath === '') normalizedPath = '/';
-    // 1. Purge old view context to prevent structural leakage
+    // Purge old view context to prevent structural leakage
     if (currentRenderedNode) {
       // TODO: Call Layer 3 state/effect cleanups for the unmounting page here
       container.removeChild(currentRenderedNode);
       currentRenderedNode = null;
     }
 
-    // 2. Lookup matching component view or default to root / 404 handler
-    const TargetComponent = routes.get(normalizedPath) || (() => {
-      return h('div', { style: { padding: '20px', color: 'red' } }, '404 - Page Not Found');
-    });
+    // Lookup matching component view or default to root / 404 handler
+    const TargetComponent = routes.get(normalizedPath) || getClean404Component(h);
 
-    // 3. CRITICAL UPGRADE: Build the target component view node via our Levelo h() factory
+    // CRITICAL UPGRADE: Build the target component view node via our Levelo h() factory
     // This allows children to inherit dynamic state scope safely during construction
     const instance = h(TargetComponent, null);
     
-    if (instance instanceof HTMLElement) {
+    if (instance instanceof Element) {
       currentRenderedNode = instance;
       container.appendChild(currentRenderedNode);
       

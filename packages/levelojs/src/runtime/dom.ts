@@ -1,4 +1,4 @@
-// dom.js - Production-Ready High-Performance DOM Factory for Levelo JS
+// dom.ts - Production-Ready High-Performance DOM Factory for Levelo JS
 
 /**
  * Global reactive tracking context inspired by SolidJS.
@@ -6,22 +6,25 @@
  */
 
 import { effect } from './reactivity/index.js';
-export let activeOwner = null;
+//export let activeOwner: any = null;
 
-export function setOwner(owner) {
-  activeOwner = owner;
-}
+//export function setOwner(owner: any): void {
+  //activeOwner = owner;
+//}
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const MATH_NS = "http://www.w3.org/1998/Math/MathML";
+
+export type TagType = string | ((props: any) => Element);
+type lastAnchorType = Comment | Element;
 
 /**
  * HyperScript Factory (h) - Translates Levelo JSX into highly optimized browser nodes.
  * Supports static values, dynamic getter attributes, and functional text nodes.
  */
-export function h(tag, props, ...children) {
-  const safeProps = props || {};
-  let element;
+export function h(tag: TagType, props: Record<string, any> | null, ...children: any[]): Element {
+  const safeProps: Record<string, any> = props || {};
+  let element: Element;
   
   // Seamlessly normalize 'className' to 'class' for React ecosystem compatibility
   if ('className' in safeProps) {
@@ -35,7 +38,7 @@ export function h(tag, props, ...children) {
   }
 
 
-  // 1. Component Resolution Layer (<Pages />, <Page />, <HomePage />)
+  // Component Resolution Layer (<Pages />, <Page />, <HomePage />)
   if (typeof tag === 'function') {
     safeProps.children = children.length === 1 ? children[0] : children;
     return tag(safeProps);
@@ -54,40 +57,42 @@ export function h(tag, props, ...children) {
   }
 
 
-  // 3. Smart Attribute & Property Mapping
+  // Smart Attribute & Property Mapping
   Object.entries(safeProps).forEach(([key, value]) => {
     if (key === 'children') return;
 
+    let targetKey = key;
     if (namespace === SVG_NS) {
-      if (key === 'strokeWidth') key = 'stroke-width';
-      if (key === 'strokeLinecap') key = 'stroke-linecap';
-      if (key === 'strokeLinejoin') key = 'stroke-linejoin';
+      if (targetKey === 'strokeWidth') targetKey = 'stroke-width';
+      if (targetKey === 'strokeLinecap') targetKey = 'stroke-linecap';
+      if (targetKey === 'strokeLinejoin') targetKey = 'stroke-linejoin';
     }
 
-    // A. Intercept and Track Event Listeners (e.g., onclick)
-    if (key.startsWith('on') && typeof value === 'function') {
-      const eventName = key.toLowerCase().substring(2);
+    // Intercept and Track Event Listeners (e.g., onclick)
+    if (targetKey.startsWith('on') && typeof value === 'function') {
+      const eventName = targetKey.toLowerCase().substring(2);
       element.addEventListener(eventName, value);
     }
-    // B. Handle Static or Reactive Style Objects
-    else if (key === 'style' && value !== null) {
+    // Handle Static or Reactive Style Objects
+    else if (targetKey === 'style' && value !== null) {
       const descriptor = Object.getOwnPropertyDescriptor(safeProps, key);
+      const htmlElement = element as HTMLElement | SVGElement;
       if (descriptor && descriptor.get) {
         // Reactive style
         effect(() => {
           const styleVal = safeProps[key];
           if (typeof styleVal === 'object') {
-            Object.assign(element.style, styleVal);
+            Object.assign(htmlElement.style, styleVal);
           } else if (typeof styleVal === 'string') {
-            element.style.cssText = styleVal;
+            htmlElement.style.cssText = styleVal;
           }
         });
       } else if (typeof value === 'object') {
         // Static style
-        Object.assign(element.style, value);
+        Object.assign(htmlElement.style, value);
       }
     }
-    // C. Handle Dynamic Getters / Properties
+    // Handle Dynamic Getters / Properties
     else {
       // If the property has a JavaScript 'getter' descriptor, it's a dynamic reactive property
       const descriptor = Object.getOwnPropertyDescriptor(safeProps, key);
@@ -97,69 +102,67 @@ export function h(tag, props, ...children) {
           let val = safeProps[key];
           if (typeof val === 'function') val = val();
           if (val !== false && val !== null && val !== undefined) {
-            element.setAttribute(key, val);
+            element.setAttribute(targetKey, String(val));
           }
         });
       } else {
         if (value !== false && value !== null && value !== undefined) {
-          element.setAttribute(key, value);
+          element.setAttribute(targetKey, String(value));
         }
       }
     }
   });
 
-  // 4. Recursive Children Processing Injection System
-  const processChildNode = (child, parentNamespace = null) => {
+  // Recursive Children Processing Injection System
+  const processChildNode = (child: any, parentNamespace: string | null = null) => {
     if (child === null || child === undefined || child === false) return;
 
     // If child is an arrow function wrapper -> () => count() (Generated by our Compiler)
     if (typeof child === 'function') {
-      const result = child();
-      
-      //text result
-      if (typeof result === 'string' || typeof result === 'number') {
-        const textNode = document.createTextNode('');
-        element.appendChild(textNode);
-        effect(() => {
-          textNode.textContent = child();
-        });
-      }
-      else if (result instanceof Element) {
-        element.appendChild(result);
-      }
-      
-      // Element result — conditional/list
-      else {
-        const anchor = document.createComment('levelo');
-        element.appendChild(anchor);
-        let currentNodes = [];
-        effect(() => {
-          const result = child();
-    
-          // Purano nodes clear koro
-          currentNodes.forEach(n => n.remove());
-          currentNodes = [];
-    
-          if (result instanceof Element) {
-            anchor.after(result);
-            currentNodes = [result];
-          } 
-          else if (Array.isArray(result)) {
-            result.forEach(item => {
-              if (item instanceof Element) {
-                 anchor.before(item);
-                currentNodes.push(item);
-                }
-            });
-          }
-          else if (result !== null && result !== undefined) {
-            const t = document.createTextNode(String(result));
-            anchor.after(t);
-            currentNodes = [t];
-          }
-        });
-      }
+      const anchor = document.createComment('levelo-dynamic');
+      element.appendChild(anchor);
+      let currentNodes: (Element | Text)[] = [];
+
+      effect(() => {
+        const res = child();
+        //remove old nodes
+        currentNodes.forEach(n => n.remove());
+        currentNodes = [];
+
+        if (res === null || res === undefined || res === false) return;
+
+        // if the return value is directly an Element (such as SVG or DIV)
+        if (res instanceof Element) {
+          anchor.after(res);
+          currentNodes=[res];
+        }
+        
+        // if the return value is a Arry/List
+        else if (Array.isArray(res)) {
+          let lastAnchor: lastAnchorType = anchor;
+          res.forEach(item => {
+            if (item === null || item === undefined || item === false) return;
+            let nodeToInsert: Element | Text;
+            if (item instanceof Element) {
+              nodeToInsert = item;
+            } else {
+              nodeToInsert = document.createTextNode(String(item));
+            }
+            lastAnchor.after(nodeToInsert);
+            lastAnchor = nodeToInsert;
+            currentNodes.push(nodeToInsert);
+          });
+        }
+
+        // if the return value is a Primitive (string, number)
+        else {
+          const t = document.createTextNode(String(res));
+          anchor.after(t);
+          currentNodes = [t];
+        }
+      });
     }
+
     // If child is a nested Element node
     else if (child instanceof Element) {
       element.appendChild(child)
@@ -186,7 +189,7 @@ export function h(tag, props, ...children) {
 /**
  * Standard Application Target Mounting Entry Root Runtime.
  */
-export function render(rootComponent, container) {
+export function render(rootComponent: () => any, container: HTMLElement | null): void {
   if (!container) return console.error('[Levelo] Dom injection target container missing.');
   container.innerHTML = '';
   

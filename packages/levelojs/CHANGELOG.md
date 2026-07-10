@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0] - 2026-07-10
+
+### Added
+- **Reactive Ownership Architecture (`owner.ts`)**: Introduced a robust hierarchical tracking context to manage nested reactive scopes and side-effects smoothly.
+- **Advanced Lifecycle Mechanisms (`mount` & `cleanup`)**: 
+  - Added `mount()` to safely schedule tasks precisely after the browser finishes synchronous layout painting.
+  - Added `cleanup()` to capture and wipe out intervals, event listeners, and pending tasks during state or route transitions.
+- **Ownership-Driven Effects**: Enhanced the core `effect()` engine to integrate with the new ownership layer, auto-disposing stale tracking dependencies and ensuring absolute mitigation against memory leaks.
+- **Polished 404 Error Component**: Re-designed the core single-page application fallback viewport (`Page Not Found`) with a modern, high-fidelity native CSS layout, featuring clean typography and responsive alignment.
+
+### Changed
+- **Full TypeScript Migration**: Transformed the entire runtime engine core and internal modules (`.js` to `.ts`) to enforce rigid compile-time safety and self-documenting types across the codebase.
+- **High-Performance Production Bundling**: Migrated away from publishing raw uncompiled source files. Integrated **`tsup`** as the official build bundler to generate heavily optimized, tree-shakable distributed bundles (`dist/index.js`).
+- **Monorepo / Package Tooling Overhaul**: Moved the development environment ecosystem from standard `npm` to **`pnpm`** to achieve ultra-fast dependency caching and workspace linking.
+- **Compiler Output Modernization**: Migrated the core compiler runtime artifact from CommonJS to standard ES Modules, converting `compiler/index.cjs` into fully modern `compiler/index.js`.
+
+---
+
 ## [1.3.0] - 2026-06-21
 
 ### Added

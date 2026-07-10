@@ -1,15 +1,31 @@
 {
   "name": "levelojs",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "A core building library for the Levelo JS framework, providing reactive primitives and a Direct Real DOM-based rendering interface for optimized UI construction.",
-  "main": "src/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "exports": {
-    ".": "./src/index.js",
-    "./compiler": "./src/compiler/index.cjs"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./compiler": {
+      "import": "./dist/compiler.js",
+      "require": "./dist/compiler.cjs"
+    }
   },
   "scripts": {
-    "build": "echo 'No build script yet'",
-    "test": "echo 'No tests yet'"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "levelo",
@@ -40,5 +56,12 @@
   "dependencies": {
     "@babel/core": "^7.29.7",
     "@babel/plugin-syntax-jsx": "^7.29.7"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
   }
 }

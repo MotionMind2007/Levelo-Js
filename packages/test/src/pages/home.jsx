@@ -1,84 +1,75 @@
-import { state, effect, head, style } from 'levelojs';
+import { state, head, mount, cleanup, effect } from 'levelojs';
 import '../Mind.css';
-import logo from '../assets/logo.svg';
 
-head({
-  title: 'Next Level Frontend with Levelo JS',
-  description: 'Ultra fast reactive framework. No Virtual DOM. Direct Real DOM. Built for speed and simplicity.'
-});
+export function SunIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+    </svg>
+  );
+}
+
+export function MoonIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+  );
+}
 
 function Home() {
-  const [count, setCount] = state(2);
+  head({
+    title: 'Lifecycle & V2 Test | Levelo JS',
+    description: 'Testing mount, cleanup, and reactive layers in Levelo JS v2.0.0',
+  });
+
+  const [isLight, setIsLight] = state(true);
+
+  mount(() => {
+    console.log("🔥 [Levelo V2] Mount Success: Elements are painted into the Real DOM!");
+  });
+
+  let timerId;
+  
+  effect(() => {
+    const currentMode = isLight() ? 'Light Mode' : 'Dark Mode';
+    console.log(`📡 Effect triggered for: ${currentMode}`);
+
+    timerId = setInterval(() => {
+      console.log(`⏱️ Pulse ticking inside ${currentMode}...`);
+    }, 2000);
+
+    cleanup(() => {
+      console.log(`🧹 Cleanup success: Cleared interval for ${currentMode}`);
+      clearInterval(timerId);
+    });
+  });
+
   return (
     <div class="body">
       <div class="head">
-        <div class="ls">
-          <img class="logo" src={logo} alt="Levelo Js Logo" />
-          <h2 class="gradient-text">Levelo Js</h2>
-        </div>
-        <div class="rs">
-          <h2>
-            <strong>Motion Mind</strong>
-          </h2>
-          <p>⚡Powered By</p>
-        </div>
+        <div class="ls"><h2 class="gradient-text">Levelo Js v2.0.0</h2></div>
+        <div class="rs"><h2><strong>Motion Mind</strong></h2><p>⚡Powered By TS</p></div>
       </div>
+
       <div class="hero">
-        <div class="badge">
-            <p style={{fontWeight: 400}}>available version <strong style={{ marginLeft: "5px" }} class="gradient-text">2.0.0</strong></p>
-        </div>
-        {/*content*/}
         <div class="hero-text">
-          <h1>Next Level <br/><span class="gradient-text">Frontend</span><br/>with Levelo JS</h1>
+          <h1>Lifecycle <br/><span class="gradient-text">Tracking</span><br/>Ground</h1>
         </div>
-        <p class="details">
-          A lightweight & Ultra fast reactive framework. No Virtual DOM. Direct Real DOM. 
-          Built for speed and simplicity by Motion Mind.
-        </p>
-        <div class="levelBtn">
-          <a class="level" href="#increase">Start Leveling Up ➔</a>
+
+        <div class="levelBox" style={{ padding: "20px", display: "inline-flex", justifyContent: "center", alignItems: "center", minHeight: "64px" }}>
+          {isLight() ? <SunIcon /> : <MoonIcon />}
         </div>
-        <p class="docs-note">
-          New to Levelo JS?
-          <a class="gradient-text" href="/document">
-            Read the documentation →
-          </a>
-        </p>
-        <div class="levelBox">
-          <h2>{count()}</h2>
-        </div>
-        <div class="levelCountBtn">
-          <button onclick={() => setCount(count() + 1)} id="increase">Level Up 
+
+        <div class="levelCountBtn" style={{ marginTop: "20px" }}>
+          <button onclick={() => setIsLight(!isLight())} id="increase">
+            Toggle Icon State
           </button>
-        </div>
-        <div class="dashActive">
-          <div class="dashHeader">
-            <span class="dotContent">
-              <span  class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-            </span>
-            <p class="brandText">powered by Motion Mind</p>
-          </div>
-          <div class="dashContent">
-            <h2 class="dashTitle">Levelo Js</h2>
-            <p class="dashSubTitle">Real DOM • Zero Runtime</p>
-          </div>
-          <div class="refer">
-            <div class="rb dom">
-              <p class="mt">Real DOM Updates</p>
-              <p class="ma">Direct</p>
-              <p class="msa">Native Performance</p>
-            </div>
-            <div class="rb overhead">
-              <p class="mt">Runtime Overhead</p>
-              <p class="ma">0%</p>
-              <p class="msa">Ultra Light</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
+
 export default Home;

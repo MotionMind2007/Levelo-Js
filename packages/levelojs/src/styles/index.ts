@@ -1,17 +1,23 @@
-// index.js - Hybrid Scoped & Global Object-to-CSS Injection Engine for Levelo JS
+// index.ts - Hybrid Scoped & Global Object-to-CSS Injection Engine for Levelo JS
+
+export interface StyleRules {
+  [selector: string]: Record<string, string | number>;
+}
+
+export interface ClassMap {
+  [rawKey: string]: string;
+}
 
 /**
  * Dynamically injects JavaScript style objects as Scoped CSS and raw Global CSS rules simultaneously.
  * Guarantees that both dot-prefixed and raw plain keys resolve to both standard strings and scoped object mappings.
- * @param {Object} rulesObj - Nested style schema containing selectors and properties
- * @returns {Object} - Object containing mapped clean key-value pairs for scoped usage
  */
-export function style(rulesObj) {
+export function style(rulesObj: StyleRules): ClassMap {
   // Return an empty fallback during non-browser environment build phases
   if (typeof document === 'undefined') return {};
 
   // 1. Locate or programmatically spawn the official unified Levelo style tag sheet
-  let styleTag = document.getElementById('levelo-style-sheet');
+  let styleTag = document.getElementById('levelo-style-sheet') as HTMLStyleElement | null;
   if (!styleTag) {
     styleTag = document.createElement('style');
     styleTag.setAttribute('id', 'levelo-style-sheet');
@@ -19,7 +25,7 @@ export function style(rulesObj) {
   }
 
   const uniqueHash = Math.random().toString(36).substring(2, 7);
-  const classMap = {};
+  const classMap: ClassMap = {};
   let cssString = '';
 
   // 2. Loop through the key-value mappings to compile the ultimate hybrid style sheet buffer

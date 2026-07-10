@@ -19,8 +19,8 @@ Scaffold a complete Levelo JS project instantly:
 ```sh
 npx create-levelo-app my-app
 cd my-app
-npm install
-npm run dev
+npm install # or pnpm install
+npm run dev # or pnpm dev 
 ```
 
 ### Manual Installation
@@ -28,7 +28,9 @@ npm run dev
 Add Levelo JS to an existing project:
 
 ```sh
-npm install levelojs
+npm install levelojs 
+# or 
+pnpm add levelojs
 ```
 
 ## Quick Start
@@ -61,22 +63,25 @@ export default Counter;
 
 ## Features
 
-- **No Virtual DOM** — Direct Real DOM updates, zero reconciliation overhead
-- **Ultra Lightweight** — Minimal footprint, maximum performance
-- **Fine-grained Reactivity** — Only what changes, updates
-- **JSX Support** — Familiar developer experience
-- **Vite-powered** — Instant HMR and fast builds
+- **Zero Virtual DOM Overhead** - Bypasses VDOM diffing completely; updates the Real DOM nodes directly.
+- **Fine-grained Reactivity** - Targeted structural updates via an independent runtime tracking graph.
+- **Hierarchical Ownership** - Native tracking scopes ensure nested reactions dispose properly with zero memory leaks.
+- **TypeScript Powered** - Complete internal codebase rewrite into strict, type-safe structures.
+- **JSX Support** - Standard developer-friendly component structuring with seamless reactive attribute bindings.
+- **Vite-integrated** - Pre-configured for instantaneous Hot Module Replacement (HMR) and optimized distribution builds.
 
 ## Core API
 
-| API | Description |
-|---|---|
-| `state` | Reactive state primitive |
-| `effect` | Reactive side effects |
-| `computed` | Derived reactive values |
-| `head` | Document metadata management |
-| `render` | Mount component to DOM |
-| `h` | Real DOM element factory (internal) |
+| API | Type | Description |
+|---  |---   |---          |
+| `state` | Primitive | Creates a reactive state atom with a getter/setter tuple. |
+| `effect` | Side Effect | Tracks active reactive dependencies and re-executes automatically. |
+| `computed` | Memoization | Derives stateful values efficiently using caching mechanics.|
+| `cleanup` | Lifecycle | Registers disposal routines inside active tracking ownership contexts. |
+| `mount` | Lifecycle | Schedules code execution precisely after layout nodes paint to the Real DOM. |
+| `head` | SEO Management | Dynamic, component-driven configuration for document metadata layers. |
+| `render` | Bootstrapper | Injects and mounts the root structural component tree to a DOM container. |
+| `h` | Factory | Real DOM internal hyperscript generator (compiler-targeted). |
 
 ## Packages
 

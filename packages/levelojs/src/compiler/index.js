@@ -1,6 +1,6 @@
 // index.cjs - Node-Isolated Levelo JS Compiler Plugin (CommonJS format mirroring vite-plugin-solid)
-const { createFilter } = require('vite');
-const babel = require('@babel/core');
+import { createFilter } from 'vite';
+import babel from '@babel/core';
 
 /**
  * Helper utility to isolate file extension identifiers safely.
@@ -12,8 +12,10 @@ function getExtension(filename) {
 
 /**
  * Enterprise-Grade Vite Plugin for Levelo JS.
+ * @param { { include?: any, exclude?: any } } options - Levelo Compiler Options
+ * @returns { import('vite').Plugin } - Official Vite Plugin Type
  */
-function leveloPlugin(options = {}) {
+export function leveloPlugin(options = {}) {
   const filter = createFilter(options.include, options.exclude);
   let projectRoot = process.cwd();
 
@@ -148,8 +150,8 @@ function transformJSX(path, t, parentNameSpace = null) {
     }
     // Recursively transform nested JSX elements while passing types (t) and the active namespace context
     else if (t.isJSXElement(child)) {
-      transformJSX(childPaths[index], t, namespace)
-      children.push(childPaths[index].node)
+      const transformedChild = transformJSX(childPaths[index], t, namespace);
+      children.push(transformedChild);
     }
   });
 
@@ -162,6 +164,7 @@ function transformJSX(path, t, parentNameSpace = null) {
   path.replaceWith(callExpression);
   path.skip();
 
+  return callExpression;
 }
 
 /**
@@ -178,6 +181,3 @@ function leveloJsBabelTransformer({ types: t }) {
     }
   };
 }
-
-// Export via CommonJS explicitly to cut off Vite client injections
-module.exports = { leveloPlugin };
