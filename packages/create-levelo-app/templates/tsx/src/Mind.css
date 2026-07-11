@@ -221,7 +221,7 @@
   border-radius: 32px;
   box-shadow: 0 25px 60px -15px rgba(91, 79, 255, 0.06);
   width: 360px;
-  max-height: 360px;
+  height: 360px;
   text-align: center;
   position: relative;
   overflow: hidden;

@@ -62,19 +62,26 @@ export function h(tag: TagType, props: Record<string, any> | null, ...children: 
     if (key === 'children') return;
 
     let targetKey = key;
-    if (namespace === SVG_NS) {
-      if (targetKey === 'strokeWidth') targetKey = 'stroke-width';
-      if (targetKey === 'strokeLinecap') targetKey = 'stroke-linecap';
-      if (targetKey === 'strokeLinejoin') targetKey = 'stroke-linejoin';
-    }
 
     // Intercept and Track Event Listeners (e.g., onclick)
     if (targetKey.startsWith('on') && typeof value === 'function') {
       const eventName = targetKey.toLowerCase().substring(2);
       element.addEventListener(eventName, value);
+      return;
+    }
+    if (namespace === SVG_NS) {
+
+      const camelCaseExceptions = ['viewBox', 'gradientTransform', 'gradientUnits', 'patternUnits'];
+
+      if (camelCaseExceptions.includes(targetKey)) {
+        // // targetKey will remain as it is (e.g., 'viewBox')
+      } else {
+        targetKey = targetKey.replace(/([A-Z])/g, "-$1").toLowerCase();
+      }
+      
     }
     // Handle Static or Reactive Style Objects
-    else if (targetKey === 'style' && value !== null) {
+    if (targetKey === 'style' && value !== null) {
       const descriptor = Object.getOwnPropertyDescriptor(safeProps, key);
       const htmlElement = element as HTMLElement | SVGElement;
       if (descriptor && descriptor.get) {

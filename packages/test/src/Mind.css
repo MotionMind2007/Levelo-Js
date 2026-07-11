@@ -336,6 +336,10 @@
   .navbar {
     padding: 20px 5%;
   }
+  .logo-svg-wrap svg {
+    width: 10px;
+    height: 10px;
+  }
   .hero-split {
     flex-direction: column;
     text-align: center;

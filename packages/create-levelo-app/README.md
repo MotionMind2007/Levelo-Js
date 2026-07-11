@@ -1,4 +1,5 @@
 <div align="center">
+<img style="width: 200px; height: 200px;" src="https://raw.githubusercontent.com/MotionMind2007/Levelo-Js/main/assets/logo-colored.svg">
   <h1>create-levelo-app</h1>
   <a href="https://lab.motionmind.me"><img alt="Made by Motion Mind" src="https://img.shields.io/badge/MADE%20BY%20Motion%20Mind-000000.svg?style=for-the-badge&labelColor=000"></a>
   <a href="https://www.npmjs.com/package/create-levelo-app"><img alt="NPM version" src="https://img.shields.io/npm/v/create-levelo-app.svg?style=for-the-badge&labelColor=000000"></a>
@@ -40,19 +41,33 @@ npx create-levelo-app .
 
 ## What You Get
 
+### For Javascript Template:
 ```
 my-app/
 ├── src/
-│   ├── assets/
-│   │   └── logo.svg
+│   ├── assets/             ← Static assets
 │   ├── pages/              ← All pages
-│   ├── index.css
+│   ├── index.css           ← Global styles
 │   ├── Mind.jsx            ← Main entry file
 │   └── index.jsx           ← App entry point
 ├── index.html
 ├── vite.config.js          ← Levelo Vite plugin pre-configured
-├── levelo.config.js
-└── package.json            ← Project name auto-set
+├── levelo.config.js        ← Custom levelo config
+└── package.json
+```
+### For TypeScript Template:
+```
+my-app/
+├── src/
+│   ├── assets/         ← Static assets
+│   ├── pages/          ← All pages
+│   ├── index.css       ← Global styles
+│   ├── Mind.tsx        ← Main entry file
+│   └── index.tsx       ← App entry point
+├── index.html
+├── vite.config.ts      ← Levelo Vite plugin pre-configured
+├── levelo.config.ts    ← Custom levelo config
+└── package.json
 ```
 
 ---
@@ -73,14 +88,14 @@ my-app/
 | Template | Status |
 |---|---|
 | JavaScript (default) | ✅ Available |
-| TypeScript | 🔜 Pending |
+| TypeScript | ✅ Available |
 | Minimal | 🔜 Pending |
 
 ---
 
 ## Related
 
-- [Levelo JS Core](https://github.com/MotionMind2007/Levelo-Js/tree/main/packages/levelojs) — The core framework
+- [Levelo Js](https://levelojs.motionmind.me) — Documents
 - [GitHub Repository](https://github.com/MotionMind2007/Levelo-Js) — Full monorepo
 - [Motion Mind Lab](https://lab.motionmind.me) — More products by Motion Mind
 

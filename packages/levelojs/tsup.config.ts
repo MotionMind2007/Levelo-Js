@@ -16,7 +16,7 @@ export default defineConfig([
             compiler: 'src/compiler/index.js',
         },
         format: ['cjs', 'esm'],
-        dts: false,
+        dts: true,
         splitting: false,
         sourcemap: true,
         clean: false,

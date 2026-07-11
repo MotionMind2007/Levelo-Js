@@ -41,11 +41,11 @@ my-app/
 │   ├── assets/         ← Static assets
 │   ├── pages/          ← All pages
 │   ├── index.css       ← Global styles
-│   ├── Mind.jsx        ← Main entry file
-│   └── index.jsx       ← App entry point
+│   ├── Mind.tsx        ← Main entry file
+│   └── index.tsx       ← App entry point
 ├── index.html
-├── vite.config.js      ← Levelo Vite plugin pre-configured
-├── levelo.config.js    ← Custom levelo config
+├── vite.config.ts      ← Levelo Vite plugin pre-configured
+├── levelo.config.ts    ← Custom levelo config
 └── package.json
 ```
 

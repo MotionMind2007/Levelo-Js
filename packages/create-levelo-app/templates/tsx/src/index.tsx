@@ -1,6 +1,6 @@
-//index.jsx
+//index.tsx
 import { render } from 'levelojs';
-import Mind from './Mind.jsx';
+import Mind from './Mind.js';
 import './index.css';
 
 render(Mind, document.getElementById('app'));

@@ -62,7 +62,7 @@ function Mind() {
             </div>
 
             <p class="file-instruction">
-              Get started by modifying <code class="code-highlight">src/Mind.jsx</code> to watch instant updates.
+              Get started by modifying <code class="code-highlight">src/Mind.tsx</code> to watch instant updates.
             </p>
           </div>
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1] - 2026-07-11
+
+### Fixed
+- **Compiler/SVG:** Fixed SVG rendering bug where `viewBox` attribute was incorrectly transformed into kebab-case (`view-box`), causing SVG assets to disappear from the layout. Added strict exception mapping for camelCase SVG core attributes.
+- **Monorepo/Dependencies:** Resolved `ERR_MODULE_NOT_FOUND` on strict package managers like `pnpm` by decoupling development runtime bundles and properly declaring loose `peerDependencies` (`*`) for backward-compatibility with older projects.
+
+---
+
 ## [2.0.0] - 2026-07-10
 
 ### Added
