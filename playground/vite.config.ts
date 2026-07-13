@@ -1,7 +1,7 @@
-// vite.config.js - Vite Configuration for Levelo JS Test Environment
+// vite.config.ts - Vite Configuration for Levelo JS Test Environment
 import { defineConfig } from 'vite';
 import { leveloPlugin } from 'levelojs/compiler';
-import leveloConfig from './levelo.config.js';
+import leveloConfig from './levelo.config';
 
 export default defineConfig({
   plugins: [

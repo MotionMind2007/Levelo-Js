@@ -1,5 +1,14 @@
 # Changelog
 
+## All notable changes to this project will be documented in this file.
+
+## [2.0.2] - 2026-07-14
+### Added
+- **Reactive String Rendering:** Introduced the `render-string` attribute handler to dynamically intercept string injections and seamlessly push them into the Direct Real DOM matrix.
+
+### Changed
+- **TypeScript Migration:** Ported the entire core codebase from JavaScript (`src/compiler/index.js`) to full strict TypeScript (`src/compiler/index.ts`) to provide enterprise-grade safety, proper typing for compilation contexts, and deep IDE autocompletion.
+
 ## [2.0.1] - 2026-07-11
 
 ### Fixed

@@ -208,9 +208,10 @@
 
 /* Interactive Sandbox Card Module */
 .interactive-zone {
-  flex: 1 1 360px;
+  flex: 1;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .demo-card {
@@ -219,8 +220,8 @@
   padding: 40px;
   border-radius: 32px;
   box-shadow: 0 25px 60px -15px rgba(91, 79, 255, 0.06);
-  width: 100%;
-  max-width: 360px;
+  width: 360px;
+  height: 360px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -336,9 +337,18 @@
   .navbar {
     padding: 20px 5%;
   }
+  .logo-group {
+    gap: 8px;
+  }
   .logo-svg-wrap svg {
-    width: 10px;
-    height: 10px;
+    width: 24px;
+    height: 24px;
+  }
+  .logo-text {
+    font-size: 18px;
+  }
+  .nav-links {
+    gap: 10px;
   }
   .hero-split {
     flex-direction: column;
@@ -349,5 +359,12 @@
   }
   .action-group {
     justify-content: center;
+  }
+  .demo-card {
+    width: 90%;
+    max-width: 100%;
+  }
+  .footer {
+    font-size: 12px;
   }
 }

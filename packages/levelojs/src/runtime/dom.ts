@@ -63,6 +63,11 @@ export function h(tag: TagType, props: Record<string, any> | null, ...children: 
 
     let targetKey = key;
 
+    if (key === "render-string") {
+      element.innerHTML = String(value);
+      return;
+    }
+
     // Intercept and Track Event Listeners (e.g., onclick)
     if (targetKey.startsWith('on') && typeof value === 'function') {
       const eventName = targetKey.toLowerCase().substring(2);

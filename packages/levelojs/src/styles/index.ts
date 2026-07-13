@@ -1,4 +1,4 @@
-// index.ts - Hybrid Scoped & Global Object-to-CSS Injection Engine for Levelo JS
+// src/styles/index.ts - Hybrid Scoped & Global Object-to-CSS Injection Engine for Levelo JS
 
 export interface StyleRules {
   [selector: string]: Record<string, string | number>;

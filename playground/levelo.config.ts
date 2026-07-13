@@ -1,4 +1,4 @@
-// levelo.config.js
+// levelo.config.ts
 export default {
   esbuild: {
     jsxFactory: 'h',

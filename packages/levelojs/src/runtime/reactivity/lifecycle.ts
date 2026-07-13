@@ -1,3 +1,4 @@
+// src/runtime/reactivity/lifecycle.ts
 import { activeOwner } from "./owner";
 
 /**

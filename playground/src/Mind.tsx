@@ -1,17 +1,14 @@
-import { state, mount } from 'levelojs';
+import { state } from 'levelojs';
 import './Mind.css';
 
 function Mind() {
   const [count, setCount] = state(0);
   const [version, setVersion] = state("x.x.x");
 
-  mount(() => {
-    fetch('https://registry.npmjs.org/levelojs/latest')
+  fetch('https://registry.npmjs.org/levelojs/latest')
     .then(res => res.json())
     .then(data => {setVersion(data.version); console.log(data.version)})
     .catch((e) => {setVersion("2.0.0"); console.log(e)})
-  })
-  
 
   return (
     <div class="levelo-app">
@@ -19,7 +16,7 @@ function Mind() {
       <header class="navbar">
         <div class="logo-group">
           <div class="logo-svg-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="1298 1320 476 396">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="1298 1320 476 396">
               <defs>
                 <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#5b4fff"/>
@@ -65,7 +62,7 @@ function Mind() {
             </div>
 
             <p class="file-instruction">
-              Get started by modifying <code class="code-highlight">src/Mind.jsx</code> to watch instant updates.
+              Get started by modifying <code class="code-highlight">src/Mind.tsx</code> to watch instant updates.
             </p>
           </div>
 
@@ -105,7 +102,7 @@ function Mind() {
 
       {/* Bottom Footer */}
       <footer class="footer">
-        <p>Built with passion under the <a class="brand-bold" href='/me' target='blank' style={{ marginLeft: '5px', marginRight: '5px'}}>Motion Mind</a> Initiative</p>
+        <p>Built with passion under the <a class="brand-bold" href='https://lab.motionmind.me' target='blank' style={{ marginLeft: '5px', marginRight: '5px'}}>Motion Mind</a> Initiative</p>
       </footer>
     </div>
   );

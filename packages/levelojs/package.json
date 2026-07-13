@@ -1,6 +1,6 @@
 {
   "name": "levelojs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A core building library for the Levelo JS framework, providing reactive primitives and a Direct Real DOM-based rendering interface for optimized UI construction.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,6 +18,7 @@
       "require": "./dist/index.cjs"
     },
     "./compiler": {
+      "types": "./dist/compiler.d.ts",
       "import": "./dist/compiler.js",
       "require": "./dist/compiler.cjs"
     }
@@ -55,7 +56,9 @@
   "homepage": "https://levelojs.motionmind.me",
   "dependencies": {
     "@babel/core": "^7.29.7",
-    "@babel/plugin-syntax-jsx": "^7.29.7"
+    "@babel/plugin-syntax-jsx": "^7.29.7",
+    "@babel/plugin-transform-typescript": "^7.29.7",
+    "@babel/types": "^7.29.7"
   },
   "peerDependencies": {
     "vite": "*"
