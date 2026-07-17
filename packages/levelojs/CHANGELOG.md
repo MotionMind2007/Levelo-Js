@@ -2,6 +2,26 @@
 
 ## All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-07-18
+
+### Added
+- **High-Performance Batching Mechanism (`batch`):** Introduced a state mutation scheduler that groups multiple synchronized state modifications. Prevents layout thrashing by deferring updates and batching subscriber effects to trigger exactly one DOM rendering cycle.
+
+### Fixed
+- **Two-Way Input Value Tracking (`dom.ts`):** Resolved a critical core reactive binding bug where form controls (`input`, `textarea`, `select`) failed to track and sync live state values from dynamic property descriptors. Implemented rigorous getter descriptor interrogation and explicit element property mapping within the fine-grained `effect` tracking loop.
+
+### Changed
+- **Decoupled Monorepo Architecture:** Officially extracted and isolated `vite-plugin-levelojs` into its own standalone distinct ecosystem workspace package to optimize release scopes, ease cross-dependency configurations, and clean up core library distributed artifacts.
+
+## [2.0.3] - 2026-07-14
+
+### Fixed
+- **Reactive HTML String Rendering:** Resolved a core rendering bug where the `renderString` attribute was incorrectly evaluated as an uninvoked getter method inside `Object.entries()`. Implemented active property access invocation to directly retrieve and inject raw HTML into the Real DOM target.
+- **Vite 8 Compiler Syntax:** Replaced the hyphenated compiler token syntax with a clean, standard JavaScript/TypeScript camelCase convention (`renderString`), eliminating syntax parsing errors (`PARSE_ERROR`) thrown by strict modern parsers like Vite 8 Oxc.
+
+### Changed
+- **Case-Insensitive Attribute Mapping:** Refactored the core HyperScript factory (`h`) inside `dom.ts` to process reactive markup strings using lowercase normalization, ensuring consistent framework behavior even when browsers normalize JSX custom properties down to standard DOM tokens.
+
 ## [2.0.2] - 2026-07-14
 ### Added
 - **Reactive String Rendering:** Introduced the `render-string` attribute handler to dynamically intercept string injections and seamlessly push them into the Direct Real DOM matrix.

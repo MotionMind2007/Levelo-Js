@@ -1,6 +1,6 @@
 //src/runtime/reactivity/computed.ts
-import { state, effect } from './state.js';
-import type { Getter } from './state';
+import { state, effect } from './reactivity.js';
+import type { Getter } from './reactivity.js';
 
 /**
  * Creates a derived reactive state.

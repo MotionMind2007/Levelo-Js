@@ -8,6 +8,22 @@
 
 </div>
 
+## 💥 What's New (v2.1.0 - Hot Topics)
+
+<details>
+<summary><b>Click to expand what's new in v2.1.0! 🚀</b></summary>
+<br />
+
+The performance and stability update is here! We've dropped major architectural enhancements to make Levelo JS scale beautifully in production:
+
+* **⚡ Optimized State Mutations via `batch()`**: Group multiple synchronized state updates seamlessly. Instead of triggering expensive incremental DOM rerenders for every individual mutation, the framework now queues changes and flushes them in a single cycle—drastically improving efficiency during high-frequency updates and loops.
+* **📝 Form Controls Fix (Dynamic Value Tracking)**: Fixed a structural bug in `dom.ts` where `<input>`, `<textarea>`, and `<select>` elements lost reactive synchronizations with state values. Forms are now fully safe and reactive.
+* **📦 Ecosystem Modularity**: `vite-plugin-levelojs` has been completely modularized into a standalone independent workspace package for better project scaffolding and clean build cycles.
+
+</details>
+
+---
+
 ## Getting Started
 
 Levelo JS is a lightweight, ultra-fast reactive JavaScript framework built for speed and simplicity. No Virtual DOM. Direct Real DOM. Powered by [Motion Mind](https://lab.motionmind.me).
@@ -19,8 +35,8 @@ Scaffold a complete Levelo JS project instantly:
 ```sh
 npx create-levelo-app my-app
 cd my-app
-npm install # or pnpm install
-npm run dev # or pnpm dev 
+npm install
+npm run dev
 ```
 
 ### Manual Installation
@@ -29,8 +45,6 @@ Add Levelo JS to an existing project:
 
 ```sh
 npm install levelojs 
-# or 
-pnpm add levelojs
 ```
 
 ## Quick Start
@@ -79,6 +93,7 @@ export default Counter;
 | `computed` | Memoization | Derives stateful values efficiently using caching mechanics.|
 | `cleanup` | Lifecycle | Registers disposal routines inside active tracking ownership contexts. |
 | `mount` | Lifecycle | Schedules code execution precisely after layout nodes paint to the Real DOM. |
+| `batch` | Performance | Groups multiple state mutations together into a single microtask to optimize DOM updates. |
 | `head` | SEO Management | Dynamic, component-driven configuration for document metadata layers. |
 | `render` | Bootstrapper | Injects and mounts the root structural component tree to a DOM container. |
 | `h` | Factory | Real DOM internal hyperscript generator (compiler-targeted). |
@@ -87,9 +102,9 @@ export default Counter;
 
 | Package | Description | Version |
 |---|---|---|
-| [`levelojs`](packages/levelojs) | Core framework library | ![npm](https://img.shields.io/npm/v/levelojs.svg?labelColor=000&color=000) |
-| [`create-levelo-app`](packages/create-levelo-app) | Official project scaffolding CLI | ![npm](https://img.shields.io/npm/v/create-levelo-app.svg?labelColor=000&color=000) |
-
+| `levelojs` | Core framework library | ![npm](https://img.shields.io/npm/v/levelojs.svg?labelColor=000&color=000) |
+| `create-levelo-app` | Official project scaffolding CLI | ![npm](https://img.shields.io/npm/v/create-levelo-app.svg?labelColor=000&color=000) |
+| `vite-plugin-levelojs` | levelojs vite plugin | ![npm](https://img.shields.io/npm/v/vite-plugin-levelojs?labelColor=000&color=000) |
 ## License
 
 This project is licensed under the [MIT License](LICENSE) © [Motion Mind](https://lab.motionmind.me).

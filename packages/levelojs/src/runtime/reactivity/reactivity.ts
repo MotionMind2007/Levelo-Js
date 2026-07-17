@@ -1,6 +1,7 @@
 // src/runtime/reactivity/state.ts
 
 import { setOwner, Owner } from "./owner";
+import { isBatching, queue } from "./batch";
 
 /**
  * Global tracker to register active effects.
@@ -57,12 +58,19 @@ export function state<T>(initialValue: T): [Getter<T>, Setter<T>] {
   };
 
   const setter: Setter<T> = (newValue) => {
+
     // Core functional update logic to support state callbacks safely
     const resolvedValue = typeof newValue === 'function' ? (newValue as (prev: T) => T)(value) : newValue;
 
     if (value !== resolvedValue) {
       value = resolvedValue;
-      subscribers.forEach((sub) => sub());
+      subscribers.forEach((sub) => {
+        if (isBatching) {
+          queue.add(sub)
+        } else {
+          sub();
+        }
+      });
     }
   };
 

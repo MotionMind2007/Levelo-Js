@@ -1,0 +1,50 @@
+{
+  "name": "vite-plugin-levelojs",
+  "version": "1.0.0",
+  "description": "The official Vite plugin for Levelo JS framework",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [
+    "vite-plugin",
+    "levelojs",
+    "jsx",
+    "compiler",
+    "vite-plugin-levelojs"
+  ],
+  "author": "MotionMind2007",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-syntax-jsx": "^7.29.7",
+    "@babel/plugin-transform-typescript": "^7.29.7",
+    "@babel/types": "^7.29.7"
+  },
+  "peerDependencies": {
+    "vite": "*"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vite": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MotionMind2007/Levelo-Js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MotionMind2007/Levelo-Js/issues"
+  }
+}

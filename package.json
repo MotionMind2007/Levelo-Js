@@ -5,7 +5,8 @@
   },
   "description": "Super fast beginner friendly lightweight javascript framework, powered by Motion Mind",
   "scripts": {
-    "build:levelojs": "pnpm --filter levelojs build"
+    "build:levelojs": "pnpm --filter levelojs build",
+    "build:vpl": "pnpm --filter vite-plugin-levelojs build"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
   ],
   "dependencies": {
     "levelojs": "link:packages/levelojs",
-    "tsup": "^8.5.1"
+    "tsup": "^8.5.1",
+    "vite-plugin-levelojs": "workspace:*"
   },
   "devDependencies": {
     "@babel/types": "^8.0.4",

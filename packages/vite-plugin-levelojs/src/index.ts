@@ -2,6 +2,8 @@
 import { createFilter, FilterPattern, Plugin } from 'vite';
 import babel, { PluginObj, NodePath } from '@babel/core';
 import * as t from '@babel/types';
+import syntaxJsx from '@babel/plugin-syntax-jsx';
+import transformTypescript from '@babel/plugin-transform-typescript';
 
 // Define the interface for options parameter
 interface LeveloPluginOptions {
@@ -53,10 +55,10 @@ export function leveloPlugin(options: LeveloPluginOptions = {}): Plugin {
       if (!/\.[mc]?[tj]sx$/i.test(cleanId)) return null;
 
       const isTypescript = /\.[mc]?tsx$/i.test(cleanId);
-      const babelPlugins: any = ['@babel/plugin-syntax-jsx'];
+      const babelPlugins: any = [syntaxJsx];
 
       if (isTypescript) {
-        babelPlugins.push('@babel/plugin-transform-typescript');
+        babelPlugins.push([transformTypescript, { isTSX: true }]);
       }
 
       babelPlugins.push(leveloJsBabelTransformer);
