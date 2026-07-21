@@ -8,17 +8,19 @@
 
 </div>
 
-## 💥 What's New (v2.1.0 - Hot Topics)
+## 💥 What's New & Architecture Highlights
 
 <details>
-<summary><b>Click to expand what's new in v2.1.0! 🚀</b></summary>
+<summary><b>Click to expand what's new inside Levelo JS! 🚀</b></summary>
 <br />
 
-The performance and stability update is here! We've dropped major architectural enhancements to make Levelo JS scale beautifully in production:
+The performance, stability, and developer experience update is here! We've dropped major architectural enhancements to make Levelo JS fully type-safe and production-ready:
 
-* **⚡ Optimized State Mutations via `batch()`**: Group multiple synchronized state updates seamlessly. Instead of triggering expensive incremental DOM rerenders for every individual mutation, the framework now queues changes and flushes them in a single cycle—drastically improving efficiency during high-frequency updates and loops.
-* **📝 Form Controls Fix (Dynamic Value Tracking)**: Fixed a structural bug in `dom.ts` where `<input>`, `<textarea>`, and `<select>` elements lost reactive synchronizations with state values. Forms are now fully safe and reactive.
-* **📦 Ecosystem Modularity**: `vite-plugin-levelojs` has been completely modularized into a standalone independent workspace package for better project scaffolding and clean build cycles.
+* **🛡️ Bulletproof JSX & Type Architecture**: Complete rewrite of `jsx.d.ts` and TS-module system. Enjoy full TSX auto-completion for HTML/SVG attributes and reactive props without bundle-time compiler warnings or type leaks.
+* **⚡ Optimized State Mutations via `batch()`**: Group multiple synchronized state updates seamlessly. Instead of triggering incremental DOM renders for every state change, mutations are queued and flushed in a single cycle.
+* **🧭 Enhanced Router & Dynamic Head Engine**: Native support for component-level `<Pages />` and `<Page />` routing paired with real-time reactive `<head>` management (`title`, `meta`, `OG tags`, `scripts`) for effortless single-page app SEO.
+* **📝 Form Controls & Value Synchronization**: Fixed structural tracking in `dom.ts` where `<input>`, `<textarea>`, and `<select>` elements lost sync with active state atoms. Forms are now 100% reactive.
+* **📦 Ecosystem Modularity**: `vite-plugin-levelojs` has been completely modularized into a standalone independent workspace package for clean builds and rapid DX.
 
 </details>
 

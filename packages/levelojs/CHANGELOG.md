@@ -2,6 +2,17 @@
 
 ## All notable changes to this project will be documented in this file.
 
+## v2.1.1 - 2026-07-21
+
+### Fixes
+
+* **Fix JSX Type Exports (`jsx.d.ts` & `index.ts`)**:
+  - Fixed TypeScript namespace resolution error when exporting `JSX` from package entry point.
+  - Resolved `tsup` DTS build failure (`ImportEquals should have a literal source`) for Rolldown/SWC bundler compatibility.
+  - Ensured ambient global JSX HTML/SVG element types work out-of-the-box without requiring manual type imports in client apps.
+
+---
+
 ## [2.1.0] - 2026-07-18
 
 ### Added
