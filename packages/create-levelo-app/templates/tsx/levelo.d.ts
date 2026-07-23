@@ -1,11 +1,8 @@
-declare const h: any;
-declare module 'levelojs/compiler';
-declare module '*.css' {
-  const content: any;
-  export default content;
+// levelo.d.ts
+import { h as leveloH } from 'levelojs';
+
+declare global {
+  const h: typeof leveloH;
 }
-declare namespace JSX {
-  interface IntrinsicElements {
-    [elemName: string]: any;
-  }
-}
+
+export {};

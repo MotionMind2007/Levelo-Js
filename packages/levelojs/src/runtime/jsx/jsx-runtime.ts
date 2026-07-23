@@ -3,17 +3,13 @@
  * Helps cleanly wipe out memory scales and effects during dynamic route swap cycles.
  */
 
-import { effect } from './reactivity/index.js';
-//export let activeOwner: any = null;
-
-//export function setOwner(owner: any): void {
-  //activeOwner = owner;
-//}
+import { effect } from '../reactivity/index.js';
+import type { JSX as LeveloJSX } from './jsx.d.ts';
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const MATH_NS = "http://www.w3.org/1998/Math/MathML";
 
-export type TagType = string | ((props: any) => Element);
+export type TagType = keyof LeveloJSX["IntrinsicElements"] | ((props: any) => Element) | (string & {});
 type lastAnchorType = Comment | Element;
 
 /**
@@ -49,9 +45,9 @@ export function h(tag: TagType, props: Record<string, any> | null, ...children: 
     null);
 
   if (namespace) {
-    element = document.createElementNS(namespace, tag);
+    element = document.createElementNS(namespace, tag as any);
   } else {
-    element = document.createElement(tag);
+    element = document.createElement(tag as any);
   }
 
 

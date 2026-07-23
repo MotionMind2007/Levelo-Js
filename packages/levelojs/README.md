@@ -16,7 +16,7 @@
 
 The performance, stability, and developer experience update is here! We've dropped major architectural enhancements to make Levelo JS fully type-safe and production-ready:
 
-* **🛡️ Bulletproof JSX & Type Architecture**: Complete rewrite of `jsx.d.ts` and TS-module system. Enjoy full TSX auto-completion for HTML/SVG attributes and reactive props without bundle-time compiler warnings or type leaks.
+* **🛡️ Restructured JSX Engine & Modular Typings**: Fully restructured src/runtime/jsxarchitecture with nativejsx-runtime typing integrations. Enjoy zero-config global TSX auto-completion, seamless CSS side-effect imports, and error-free bundling across CJS, ESM, and DTS pipelines.
 * **⚡ Optimized State Mutations via `batch()`**: Group multiple synchronized state updates seamlessly. Instead of triggering incremental DOM renders for every state change, mutations are queued and flushed in a single cycle.
 * **🧭 Enhanced Router & Dynamic Head Engine**: Native support for component-level `<Pages />` and `<Page />` routing paired with real-time reactive `<head>` management (`title`, `meta`, `OG tags`, `scripts`) for effortless single-page app SEO.
 * **📝 Form Controls & Value Synchronization**: Fixed structural tracking in `dom.ts` where `<input>`, `<textarea>`, and `<select>` elements lost sync with active state atoms. Forms are now 100% reactive.

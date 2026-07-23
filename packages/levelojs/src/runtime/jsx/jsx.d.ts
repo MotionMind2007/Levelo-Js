@@ -2,7 +2,7 @@
 
 declare global {
   namespace JSX {
-    type Element = HTMLElement | SVGElement;
+    type Element = Node | Element | any;
 
     export interface ElementAttributesProperty {
       props: {};

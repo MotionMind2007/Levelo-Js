@@ -2,7 +2,18 @@
 
 ## All notable changes to this project will be documented in this file.
 
-## v2.1.1 - 2026-07-21
+## [2.1.2] - 2026-07-22
+
+### Fixed & Refactored
+  - **JSX Architecture & Directory Restructuring:** 
+    - Relocated `src/jsx.d.ts` and `src/runtime/jsx-runtime.ts` into a unified `src/runtime/jsx/` directory module.
+    - Decoupled `jsx.d.ts` from the root entry point (`index.ts`) and linked it directly within `jsx-runtime.ts` to combine runtime logic with type definitions cleanly.
+  - **DTS Bundling & Import Resolution:** Resolved entry export errors (`Module has no exported member 'h'`) during `tsup` builds by synchronizing internal type bindings directly through the newly structured JSX runtime module.
+  - **Ambient JSX Typings & Asset Support:** Fixed `This JSX tag requires 'h' to be in scope` and CSS side-effect import errors by consolidating ambient types natively under the new JSX module pipeline.
+
+---
+
+## [v2.1.1] - 2026-07-21
 
 ### Fixes
 

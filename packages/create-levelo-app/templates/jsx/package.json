@@ -15,7 +15,7 @@
   "type": "module",
   "dependencies": {
     "kivex-levelo": "^1.3.0",
-    "levelojs": "^2.1.0",
+    "levelojs": "^2.1.2",
     "vite-plugin-levelojs": "^1.0.1"
   },
   "devDependencies": {

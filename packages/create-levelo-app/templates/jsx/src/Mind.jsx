@@ -103,7 +103,7 @@ function Mind() {
 
       {/* Bottom Footer */}
       <footer class="footer">
-        <p>Built with passion under the <a class="brand-bold" href='https://lab.motionmind.me' target='blank' style={{ marginLeft: '5px', marginRight: '5px'}}>Motion Mind</a> Initiative</p>
+        <p>Built with passion under the <a class="brand-bold" href='https://lab.motionmind.me' target='_blank' style={{ marginLeft: '5px', marginRight: '5px'}}>Motion Mind</a> Initiative</p>
       </footer>
     </div>
   );
