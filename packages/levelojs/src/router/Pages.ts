@@ -1,13 +1,62 @@
-// router.ts - Optimized Enterprise Routing Engine for Levelo JS (Version 2.0.0 Specs)
-import { h } from './jsx/jsx-runtime';
-import { applyHeadUpdates } from './head.js';
-import { getClean404Component } from './templates/error404.js';
+// src/router/Page.ts - Optimized Enterprise Routing Engine for Levelo JS (Version 2.0.0 Specs)
+import { h } from '../runtime/jsx/jsx-runtime';
+import { applyHeadUpdates } from '../runtime/head.js';
+import { getClean404Component } from '../runtime/templates/error404.js';
+import { setParams } from './params';
+import {resetHeadToDefault} from '../runtime/head';
+
+interface RouteDefinition {
+  path: string;
+  regex: RegExp;
+  keys: string[];
+  component: (props: any) => Element;
+}
 
 // Global registry to keep track of the dynamic route-to-component mappings
-const routes = new Map<string, (props: any) => Element>();
+const routes: RouteDefinition[] = [];
 
 // Global listener callback queue to trigger DOM view swaps when URL shifts
 const routeListeners = new Set<(path: string) => void>();
+
+/**
+ * Converts path pattern like /users/:id into RegExp and extracts keys
+ */
+function parseRoutePattern(path: string): {regex: RegExp; keys: string[]} {
+  const keys: string[] = [];
+  const pattern = path
+    .replace(/\/+$/, '')
+    .replace(/:([^\/]+)/g, (_, key) => {
+      keys.push(key);
+      return '([^/]+)';
+    });
+  
+  const regex = new RegExp(`^${pattern}(\\/)?$`);
+  return {regex, keys};
+}
+
+/**
+ * Matches current pathname against registered route patterns and extracts parameters
+ */
+function matchRoute(pathname: string): {component: (props: any) => Element; params: Record<string, string>} | null {
+  let normalizedPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.replace(/\/+$/, '') : pathname;
+  if (normalizedPath.endsWith('index.html')) {
+    normalizedPath = pathname.replace(/\/index\.html/g, '');
+  }
+
+  if (normalizedPath === '') normalizedPath = '/';
+
+  for (const route of routes) {
+    const match = normalizedPath.match(route.regex);
+    if (match) {
+      const params: Record<string, string> = {};
+      route.keys.forEach((key, index) => {
+        params[key] = match[index + 1];
+      });
+      return {component: route.component, params}
+    }
+  }
+  return null;
+}
 
 /**
  * Programmatically triggers all registered view listeners to force a re-render
@@ -45,23 +94,6 @@ if (typeof window !== 'undefined') {
   });
 }
 
-interface PageProps {
-  path: string;
-  component: (props: any) => Element;
-}
-
-/**
- * Configuration schema defining a standalone path pattern matching node.
- * Executed via Levelo's h() Factory.
- */
-export function Page(props: PageProps): Record<string, any> {
-  return {
-    type: 'PAGE_CONFIG',
-    path: props.path,
-    component: props.component
-  };
-}
-
 interface PagesProps {
   children: any | any[];
 }
@@ -77,9 +109,17 @@ export function Pages(props: PagesProps): HTMLElement {
   const children = Array.isArray(props.children) ? props.children : [props.children];
   
   children.forEach(child => {
-    // If the child configuration is an object containing valid page descriptors, register it
-    if (child && child.type === 'PAGE_CONFIG') {
-      routes.set(child.path, child.component);
+    if (child && child.type === 'PAGE_CONFIG' && child.path && child.component) {
+      const exists = routes.some(r => r.path === child.path);
+      if (!exists) {
+        const {regex, keys} = parseRoutePattern(child.path);
+        routes.push({
+          path: child.path,
+          regex: regex,
+          keys: keys,
+          component: child.component,
+        })
+      }
     }
   });
 
@@ -90,26 +130,27 @@ export function Pages(props: PagesProps): HTMLElement {
    * Evaluates the current location and replaces the active view context cleanly
    */
   const renderActiveRoute = (currentPath: string): void => {
-    let normalizedPath = currentPath.length > 1 && currentPath.endsWith('/') ? currentPath.replace(/\/+$/, '') : currentPath;
-    
-    if (normalizedPath.endsWith('index.html')) {
-      normalizedPath = currentPath.replace(/\/index\.html/g, '');
-    }
-    
-    if (normalizedPath === '') normalizedPath = '/';
+    resetHeadToDefault(); // reset head
     // Purge old view context to prevent structural leakage
     if (currentRenderedNode) {
-      // TODO: Call Layer 3 state/effect cleanups for the unmounting page here
       container.removeChild(currentRenderedNode);
       currentRenderedNode = null;
     }
 
+    const matched = matchRoute(currentPath);
+
+    if (matched) {
+      setParams(matched.params)
+    } else {
+      setParams({});
+    }
+
     // Lookup matching component view or default to root / 404 handler
-    const TargetComponent = routes.get(normalizedPath) || getClean404Component(h);
+    const TargetComponent = matched ? matched.component : getClean404Component(h);
 
     // CRITICAL UPGRADE: Build the target component view node via our Levelo h() factory
     // This allows children to inherit dynamic state scope safely during construction
-    const instance = h(TargetComponent, null);
+    const instance = h(TargetComponent, { params: matched ? matched.params : {} });
     
     if (instance instanceof Element) {
       currentRenderedNode = instance;

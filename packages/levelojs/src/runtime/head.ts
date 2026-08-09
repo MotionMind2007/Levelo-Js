@@ -51,6 +51,9 @@ export interface HeadConfig {
   [key: string]: any;
 }
 
+// main/original title (from index.html)
+export const DEFAULT_PAGE_TITLE = document.title;
+
 /**
  * Directly updates the document head with the provided configuration.
  * Can be called safely inside components on every render cycle.
@@ -190,4 +193,9 @@ function updateBaseTag(baseConfig: string | HeadBase): void {
       }
     });
   }
+}
+
+// if home page dosn't have any title then reset it to default or main or original title (from index.html)
+export function resetHeadToDefault() {
+  document.title = DEFAULT_PAGE_TITLE;
 }

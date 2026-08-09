@@ -12,6 +12,8 @@ declare global {
     }
 
     type Reactive<T> = T | (() => T);
+    type Ref<T> = { current: T | null } | ((node: T | null) => void);
+    type AttrValue<T> = T | (() => T) | (T extends string ? string : never);
 
     export interface DOMEvents {
       onClick?: (e: MouseEvent) => void;
@@ -36,9 +38,10 @@ declare global {
     }
 
     export interface HTMLAttributes extends DOMEvents {
-      class?: Reactive<string>;
+      ref?: Ref<T>;
+      class?: string | (() => string);
       className?: Reactive<string>;
-      id?: Reactive<string>;
+      id?: string | undefined;
       style?: Reactive<Partial<CSSStyleDeclaration> | string>;
       renderString?: Reactive<string>;
       title?: Reactive<string>;
@@ -52,7 +55,7 @@ declare global {
     }
 
     export interface AnchorHTMLAttributes extends HTMLAttributes {
-      href?: Reactive<string>;
+      href?: string | undefined;
       target?: Reactive<'_blank' | '_self' | '_parent' | '_top'>;
       download?: Reactive<any>;
       rel?: Reactive<string>;

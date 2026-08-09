@@ -16,12 +16,9 @@
 
 The performance, stability, and developer experience update is here! We've dropped major architectural enhancements to make Levelo JS fully type-safe and production-ready:
 
-* **🛡️ Restructured JSX Engine & Modular Typings**: Fully restructured src/runtime/jsxarchitecture with nativejsx-runtime typing integrations. Enjoy zero-config global TSX auto-completion, seamless CSS side-effect imports, and error-free bundling across CJS, ESM, and DTS pipelines.
-* **⚡ Optimized State Mutations via `batch()`**: Group multiple synchronized state updates seamlessly. Instead of triggering incremental DOM renders for every state change, mutations are queued and flushed in a single cycle.
-* **🧭 Enhanced Router & Dynamic Head Engine**: Native support for component-level `<Pages />` and `<Page />` routing paired with real-time reactive `<head>` management (`title`, `meta`, `OG tags`, `scripts`) for effortless single-page app SEO.
-* **📝 Form Controls & Value Synchronization**: Fixed structural tracking in `dom.ts` where `<input>`, `<textarea>`, and `<select>` elements lost sync with active state atoms. Forms are now 100% reactive.
-* **📦 Ecosystem Modularity**: `vite-plugin-levelojs` has been completely modularized into a standalone independent workspace package for clean builds and rapid DX.
-
+* **🧭 Advanced Dynamic Routing & `params` API**: Upgraded the routing architecture from a single file to a modular structure (`src/router/`). Added native dynamic path parameter matching (e.g., `<Page path="/user/:id"/>`) along with the new `params` API for seamless URL state tracking.
+* **🎯 Direct DOM Access via `ref`**: Introduced full `ref` attribute support in the HyperScript factory (`h()`) for both object references (`{ current: null }`) and callback functions, complete with strict TypeScript DOM types (`HTMLInputElement`, etc.).
+* **🔄 Smart SPA Title Fallback (`head.ts`):** Captured the default `index.html` document title at startup and integrated automatic head resetting during route transitions, ensuring components without an explicit `head()` call gracefully fall back to the root title.
 </details>
 
 ---
@@ -99,6 +96,7 @@ export default Counter;
 | `head` | SEO Management | Dynamic, component-driven configuration for document metadata layers. |
 | `render` | Bootstrapper | Injects and mounts the root structural component tree to a DOM container. |
 | `h` | Factory | Real DOM internal hyperscript generator (compiler-targeted). |
+| `params` | Routing | Retrieves and tracks dynamic URL path parameters (e.g., `:id`) in single-page apps. |
 
 ## Packages
 

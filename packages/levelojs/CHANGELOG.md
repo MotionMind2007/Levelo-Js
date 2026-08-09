@@ -2,6 +2,21 @@
 
 ## All notable changes to this project will be documented in this file.
 
+## [2.1.3] - 2026-08-09
+
+### Added & Refactored
+- **Advanced Dynamic Routing & Architecture Overhaul:** 
+  - Restructured the routing engine: previously the router was contained within a single small file at `src/runtime/router.ts`, but it has now been decoupled and cleanly organized into dedicated modules under `src/router/` (`Pages.ts`, `Page.ts`, and `params.ts`).
+  - Introduced robust dynamic routing support allowing developers to define route patterns with parameters (e.g., `<Page path="/user/:id" />`).
+  - Added the new **`params`** API officially exported from Levelo JS (`index.ts`) to enable developers to easily track and access dynamic URL parameters.
+  - Integrated automated route pattern parsing (`parseRoutePattern`) to convert path tokens into optimized Regular Expressions and extract keys seamlessly during navigation shifts.
+- **Ref Support & Direct DOM Access:** 
+  - Added robust `ref` attribute support in the core HyperScript factory (`h()`), supporting both object refs (`{ current: null }`) and functional callback refs (`(node) => {}`).
+  - Integrated full TypeScript definitions for `ref` across all intrinsic element attributes (`jsx.d.ts`), mapped dynamically to their respective native DOM element types (`HTMLInputElement`, `HTMLDivElement`, etc.).
+- **Smart SPA Title Fallback (`head.ts`):** 
+  - Captured the native `index.html` title as `DEFAULT_PAGE_TITLE` upon application startup.
+  - Implemented automatic head resetting via `resetHeadToDefault()` during single-page route transitions, ensuring components without an explicit `head()` call smoothly fall back to the main document title instead of retaining stale titles from previous routes.
+
 ## [2.1.2] - 2026-07-22
 
 ### Fixed & Refactored

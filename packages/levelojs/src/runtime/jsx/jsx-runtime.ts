@@ -62,6 +62,15 @@ export function h(tag: TagType, props: Record<string, any> | null, ...children: 
       return;
     }
 
+    if (key === 'ref') {
+      if (typeof value === 'function') {
+        value(element);
+      } else if (value && typeof value === 'object') {
+        value.current = element;
+      }
+      return;
+    }
+
     if ((tag === 'input' || tag === "textarea" || tag === "select") && targetKey === 'value') {
       const inputElement = element as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 

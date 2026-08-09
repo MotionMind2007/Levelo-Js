@@ -17,6 +17,7 @@ export function getClean404Component(h: ErrorTemplateProps['h']) {
     return h('div', { 
       style: { 
         display: 'flex',
+        background: '#fff',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
