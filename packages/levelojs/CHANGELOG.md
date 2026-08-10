@@ -2,7 +2,7 @@
 
 ## All notable changes to this project will be documented in this file.
 
-## [2.1.3] - 2026-08-09
+## [2.2.0] - 2026-08-09
 
 ### Added & Refactored
 - **Advanced Dynamic Routing & Architecture Overhaul:** 
