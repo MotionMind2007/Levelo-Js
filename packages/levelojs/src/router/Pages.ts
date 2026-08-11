@@ -80,7 +80,7 @@ if (typeof window !== 'undefined') {
     if (!anchor) return;
     
     const href = anchor.getAttribute('href');
-    if (!href || href.startsWith('http://') || href.startsWith('https://') || (href.startsWith('#') && href.length > 1) || anchor.target === '_blank') {
+    if (!href || href.startsWith('http://') || href.startsWith('https://') || (href.startsWith('#') && href.length > 1) || anchor.target === '_blank' || !href.startsWith('/')) {
       return; 
     }
 

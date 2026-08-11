@@ -2,6 +2,17 @@
 
 ## All notable changes to this project will be documented in this file.
 
+## [2.2.1] - 2026-08-11
+
+### Fixed & Refactored
+  - **Router Navigation Interception:**
+    - Refined global anchor (`<a>`) click event handling in the core routing engine (`src/router/Page.ts`).
+    - Standardized internal SPA client-side routing to strictly target absolute pathnames starting with `/`.
+    - Resolved an issue where non-internal links and external protocols (such as `https://`, `mailto:`, `tel:`, `sms:`, etc.) were unintentionally intercepted by the SPA router.
+    - External links and native device protocols now bypass client-side routing cleanly, preserving default browser behavior and native application triggers.
+
+---
+
 ## [2.2.0] - 2026-08-09
 
 ### Added & Refactored
@@ -16,6 +27,8 @@
 - **Smart SPA Title Fallback (`head.ts`):** 
   - Captured the native `index.html` title as `DEFAULT_PAGE_TITLE` upon application startup.
   - Implemented automatic head resetting via `resetHeadToDefault()` during single-page route transitions, ensuring components without an explicit `head()` call smoothly fall back to the main document title instead of retaining stale titles from previous routes.
+
+---
 
 ## [2.1.2] - 2026-07-22
 

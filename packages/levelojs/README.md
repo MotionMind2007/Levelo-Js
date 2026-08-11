@@ -16,6 +16,7 @@
 
 The performance, stability, and developer experience update is here! We've dropped major architectural enhancements to make Levelo JS fully type-safe and production-ready:
 
+* **Smart Router Interception**: Perfectly bypasses external links and native protocols (mailto:, tel:, etc.) for seamless navigation!
 * **🧭 Advanced Dynamic Routing & `params` API**: Upgraded the routing architecture from a single file to a modular structure (`src/router/`). Added native dynamic path parameter matching (e.g., `<Page path="/user/:id"/>`) along with the new `params` API for seamless URL state tracking.
 * **🎯 Direct DOM Access via `ref`**: Introduced full `ref` attribute support in the HyperScript factory (`h()`) for both object references (`{ current: null }`) and callback functions, complete with strict TypeScript DOM types (`HTMLInputElement`, etc.).
 * **🔄 Smart SPA Title Fallback (`head.ts`):** Captured the default `index.html` document title at startup and integrated automatic head resetting during route transitions, ensuring components without an explicit `head()` call gracefully fall back to the root title.
