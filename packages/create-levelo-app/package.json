@@ -1,6 +1,6 @@
 {
   "name": "create-levelo-app",
-  "version": "2.0.4",
+  "version": "2.1.4",
   "description": "The official standard boilerplate bootstrapper for Levelo JS applications",
   "type": "module",
   "bin": {
@@ -35,5 +35,10 @@
   "homepage": "https://github.com/MotionMind2007/Levelo-Js#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "chalk": "^6.0.0",
+    "ora": "^9.4.1"
   }
 }

@@ -24,6 +24,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@clack/prompts": "^1.7.0",
     "levelojs": "link:packages/levelojs",
     "tsup": "^8.5.1",
     "vite-plugin-levelojs": "workspace:*"

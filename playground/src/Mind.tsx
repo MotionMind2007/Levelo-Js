@@ -1,14 +1,11 @@
-// src/Mind.tsx
-import { Pages, Page } from 'levelojs';
-import Home from './home.js';
-import Users from './users.js';
+import './Mind.css';
 
 function Mind() {
   return (
-      <Pages>
-        <Page path="/" component={Home} />
-        <Page path="/users/:id" component={Users} />
-      </Pages>
+    <div class="levelo-app">
+      <div className="">HI bro</div>
+    </div>
   );
 }
+
 export default Mind;

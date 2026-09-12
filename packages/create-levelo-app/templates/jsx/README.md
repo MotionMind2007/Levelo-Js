@@ -89,7 +89,6 @@ my-app/
 |---|---|
 | JavaScript (default) | ✅ Available |
 | TypeScript | ✅ Available |
-| Minimal | 🔜 Pending |
 
 ---
 
