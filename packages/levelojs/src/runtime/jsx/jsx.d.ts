@@ -39,8 +39,8 @@ declare global {
 
     export interface HTMLAttributes extends DOMEvents {
       ref?: Ref<T>;
-      class?: string | (() => string);
-      className?: Reactive<string>;
+      class?: string | undefined;
+      className?: string | undefined;
       id?: string | undefined;
       style?: Reactive<Partial<CSSStyleDeclaration> | string>;
       renderString?: Reactive<string>;
