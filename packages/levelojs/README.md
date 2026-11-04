@@ -26,7 +26,7 @@ The performance, stability, and developer experience update is here! We've dropp
 
 ## Getting Started
 
-Levelo JS is a lightweight, ultra-fast reactive JavaScript framework built for speed and simplicity. No Virtual DOM. Direct Real DOM. Powered by [Motion Mind](https://lab.motionmind.me).
+Levelo JS is a lightweight, ultra-fast reactive JavaScript framework built for speed and simplicity. No Virtual DOM. Direct Real DOM. Powered by [Motion Mind X](https://motionmindx.com).
 
 ### Using CLI (Recommended)
 
@@ -108,10 +108,10 @@ export default Counter;
 | `vite-plugin-levelojs` | levelojs vite plugin | ![npm](https://img.shields.io/npm/v/vite-plugin-levelojs?labelColor=000&color=000) |
 ## License
 
-This project is licensed under the [MIT License](LICENSE) © [Motion Mind](https://lab.motionmind.me).
+This project is licensed under the [MIT License](LICENSE) © [Motion Mind X](https://https://motionmindx.com).
 
 ---
 
 <div align="center">
-Built with ⚡ by <a href="https://lab.motionmind.me">Motion Mind</a>
+Built with ⚡ by <a href="https://motionmindx.com">Motion Mind X</a>
 </div>
