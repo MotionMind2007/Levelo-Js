@@ -108,7 +108,7 @@ export default Counter;
 | `vite-plugin-levelojs` | levelojs vite plugin | ![npm](https://img.shields.io/npm/v/vite-plugin-levelojs?labelColor=000&color=000) |
 ## License
 
-This project is licensed under the [MIT License](LICENSE) © [Motion Mind X](https://https://motionmindx.com).
+This project is licensed under the [MIT License](LICENSE) © [Motion Mind X](https://motionmindx.com).
 
 ---
 
