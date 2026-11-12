@@ -2,27 +2,11 @@
   <img src="https://raw.githubusercontent.com/MotionMind2007/Levelo-Js/main/assets/logo-colored.svg" alt="Levelo JS Logo" width="120">
   <h1>Levelo JS</h1>
 
-  <a href="https://lab.motionmind.me"><img alt="Made by Motion Mind" src="https://img.shields.io/badge/MADE%20BY%20Motion%20Mind-000000.svg?style=for-the-badge&labelColor=000"></a>
+  <a href="https://motionmindx.com"><img alt="Made by Motion Mind X" src="https://img.shields.io/badge/MADE%20BY%20Motion%20Mind%20X-000000.svg?style=for-the-badge&labelColor=000"></a>
   <a href="https://www.npmjs.com/package/levelojs"><img alt="NPM version" src="https://img.shields.io/npm/v/levelojs.svg?style=for-the-badge&labelColor=000000"></a>
   <a href="https://github.com/MotionMind2007/Levelo-Js/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-000000.svg?style=for-the-badge&labelColor=000000"></a>
 
 </div>
-
-## 💥 What's New & Architecture Highlights
-
-<details>
-<summary><b>Click to expand what's new inside Levelo JS! 🚀</b></summary>
-<br />
-
-The performance, stability, and developer experience update is here! We've dropped major architectural enhancements to make Levelo JS fully type-safe and production-ready:
-
-* **Smart Router Interception**: Perfectly bypasses external links and native protocols (mailto:, tel:, etc.) for seamless navigation!
-* **🧭 Advanced Dynamic Routing & `params` API**: Upgraded the routing architecture from a single file to a modular structure (`src/router/`). Added native dynamic path parameter matching (e.g., `<Page path="/user/:id"/>`) along with the new `params` API for seamless URL state tracking.
-* **🎯 Direct DOM Access via `ref`**: Introduced full `ref` attribute support in the HyperScript factory (`h()`) for both object references (`{ current: null }`) and callback functions, complete with strict TypeScript DOM types (`HTMLInputElement`, etc.).
-* **🔄 Smart SPA Title Fallback (`head.ts`):** Captured the default `index.html` document title at startup and integrated automatic head resetting during route transitions, ensuring components without an explicit `head()` call gracefully fall back to the root title.
-</details>
-
----
 
 ## Getting Started
 

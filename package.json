@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/MotionMind2007/Levelo-Js/issues"
   },
-  "homepage": "https://levelojs.motionmind.me",
+  "homepage": "https://levelojs.motionmindx.com",
   "private": true,
   "workspaces": [
     "packages/*"

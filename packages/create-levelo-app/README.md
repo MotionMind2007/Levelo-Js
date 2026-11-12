@@ -1,7 +1,7 @@
 <div align="center">
 <img style="width: 200px; height: 200px;" src="https://raw.githubusercontent.com/MotionMind2007/Levelo-Js/main/assets/logo-colored.svg">
   <h1>create-levelo-app</h1>
-  <a href="https://lab.motionmind.me"><img alt="Made by Motion Mind" src="https://img.shields.io/badge/MADE%20BY%20Motion%20Mind-000000.svg?style=for-the-badge&labelColor=000"></a>
+  <a href="https://motionmindx.com"><img alt="Made by Motion Mind X" src="https://img.shields.io/badge/MADE%20BY%20Motion%20Mind%20X-000000.svg?style=for-the-badge&labelColor=000"></a>
   <a href="https://www.npmjs.com/package/create-levelo-app"><img alt="NPM version" src="https://img.shields.io/npm/v/create-levelo-app.svg?style=for-the-badge&labelColor=000000"></a>
   <a href="https://github.com/MotionMind2007/Levelo-Js/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-000000.svg?style=for-the-badge&labelColor=000000"></a>
 </div>
@@ -9,7 +9,7 @@
 <br/>
 
 > The official CLI to scaffold [Levelo JS](https://github.com/MotionMind2007/Levelo-Js) projects instantly.  
-> No Virtual DOM. Direct Real DOM. Built for speed and simplicity by [Motion Mind](https://lab.motionmind.me).
+> No Virtual DOM. Direct Real DOM. Built for speed and simplicity by [Motion Mind X](https://motionmindx.com).
 
 ---
 
@@ -94,18 +94,18 @@ my-app/
 
 ## Related
 
-- [Levelo Js](https://levelojs.motionmind.me) — Documents
+- [Levelo Js](https://levelojs.motionmindx.com) — Documents
 - [GitHub Repository](https://github.com/MotionMind2007/Levelo-Js) — Full monorepo
-- [Motion Mind Lab](https://lab.motionmind.me) — More products by Motion Mind
+- [Motion Mind X](https://motionmindx.com) — More products by Motion Mind X
 
 ---
 
 ## License
 
-[MIT](https://github.com/MotionMind2007/Levelo-Js/blob/main/LICENSE) © [Motion Mind](https://lab.motionmind.me)
+[MIT](https://github.com/MotionMind2007/Levelo-Js/blob/main/LICENSE) © [Motion Mind X](https://motionmindx.com)
 
 ---
 
 <div align="center">
-Built with by <a href="https://lab.motionmind.me">Motion Mind</a>
+Built with by <a href="https://motionmindx.com">Motion Mind X</a>
 </div>

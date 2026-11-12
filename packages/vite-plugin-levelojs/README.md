@@ -94,7 +94,7 @@ leveloPlugin({
 
 ## Resources
 
-- Documentation: https://levelojs.motionmind.me
+- Documentation: https://levelojs.motionmindx.com
 - Source Code: https://github.com/motionmind2007/Levelo-Js/tree/main/packages/vite-plugin-levelojs
 
 ## License
