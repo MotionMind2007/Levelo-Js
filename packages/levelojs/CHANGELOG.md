@@ -2,6 +2,14 @@
 
 ## All notable changes to this project will be documented in this file.
 
+## [2.2.2]
+
+### Changed
+
+- Updated `class` and `className` attribute types to include `string | null` for better IDE autocomplete suggestions (such as `=""` instead of `{}`).
+
+---
+
 ## [2.2.1] - 2026-08-11
 
 ### Fixed & Refactored
